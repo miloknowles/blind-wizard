@@ -57,18 +57,17 @@ public static class ProbabilitySystem {
     }
 
     /*
-     * Sample an enemy element given a region.
-     */
-    public Element SampleElementGivenRegion(Region region)
+     * Add noise to probability distributions
+     */ 
+    public ElementDistribution RandomizeRegionDistribution(Region region)
     {
         ElementDistribution p_element_given_region = P_ELEMENT_GIVEN_REGION[region];
 
-        // randomly add noise to probabilities
-        List<double> noise = new List<double>{0.1, 0.1, -0.1, -0.1 };
-        var random = new Random();
+		List<double> noise = new List<double> { 0.1, 0.1, -0.1, -0.1 };
+		var random = new Random();
 
-        if (region != Primitives.Region.MMTTG)
-        {
+		if (region != Primitives.Region.MMTTG)
+		{
 			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
 			{
 				int index = random.Next(noise.Count);
@@ -76,20 +75,31 @@ public static class ProbabilitySystem {
 				p_element_given_region[elt] += noise[index];
 				noise.RemoveAt(index);
 			}
-        }
-        else 
-        {
-            noise = new List<double> { -0.1, 0.1, 0 };
+		}
+		else
+		{
+			noise = new List<double> { -0.1, 0.1, 0 };
 			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
 			{
 				int index = random.Next(noise.Count);
 				Primitives.Element elt = eltProb.Key;
-                if (elt != Primitives.Element.Water){
+				if (elt != Primitives.Element.Water)
+				{
 					p_element_given_region[elt] += noise[index];
 					noise.RemoveAt(index);
-                }
+				}
 			}
-        }
+		}
+
+        return p_element_given_region;
+    }
+
+    /*
+     * Sample an enemy element given a region.
+     */
+    public Element SampleElementGivenRegion(Region region)
+    {
+        ElementDistribution p_element_given_region = RandomizeRegionDistribution(region);
         
         // Get aligned lists of elements and their associated probabilities.
         // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.keys?view=netframework-4.8
