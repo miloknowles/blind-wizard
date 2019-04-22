@@ -14,7 +14,7 @@ using AttributeDistribution = System.Collections.Generic.Dictionary<Primitives.A
  * distributions. Internally, distributions are stored as dictionaries to
  * explicitly map from enum types to corresponding probability values.
  */
-public class ProbabilitySystem {
+public static class ProbabilitySystem {
 
     //========================== DISTRIBUTION DEFINITIONS ==============================
     // For each region, stores the probability of an enemy being each element.
@@ -62,6 +62,34 @@ public class ProbabilitySystem {
     public Element SampleElementGivenRegion(Region region)
     {
         ElementDistribution p_element_given_region = P_ELEMENT_GIVEN_REGION[region];
+
+        // randomly add noise to probabilities
+        List<double> noise = new List<double>{0.1, 0.1, -0.1, -0.1 };
+        var random = new Random();
+
+        if (region != Primitives.Region.MMTTG)
+        {
+			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
+			{
+				int index = random.Next(noise.Count);
+				Primitives.Element elt = eltProb.Key;
+				p_element_given_region[elt] += noise[index];
+				noise.RemoveAt(index);
+			}
+        }
+        else 
+        {
+            noise = new List<double> { -0.1, 0.1, 0 };
+			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
+			{
+				int index = random.Next(noise.Count);
+				Primitives.Element elt = eltProb.Key;
+                if (elt != Primitives.Element.Water){
+					p_element_given_region[elt] += noise[index];
+					noise.RemoveAt(index);
+                }
+			}
+        }
         
         // Get aligned lists of elements and their associated probabilities.
         // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.keys?view=netframework-4.8
