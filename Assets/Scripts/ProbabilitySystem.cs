@@ -62,7 +62,7 @@ public static class ProbabilitySystem {
      */ 
     public void RandomizeRegionDistributions()
     {
-        for (Region region in P_ELEMENT_GIVEN_REGION.Keys)
+        foreach (Region region in P_ELEMENT_GIVEN_REGION.Keys)
         {
             List<double> noise;
 			var random = new Random();
