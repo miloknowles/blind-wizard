@@ -100,7 +100,7 @@ public class UnitStats : MonoBehaviour, IComparable
 
     public void recieveDamage(float damage)
     {
-        this.health -= damage;
+        this.health -= (int)damage;
         Debug.Log("Recieved " + damage + " damage.");
         if (this.health <= 0)
         {

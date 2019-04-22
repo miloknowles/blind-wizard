@@ -6,6 +6,11 @@ using System.Collections.Generic;
 // or C# things with the same name.
 namespace Primitives {
 
+static class Constants
+{
+    public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.2;
+};
+
 /*
  * Defines all of the regions accessible in the game.
  */
@@ -42,9 +47,67 @@ public enum Attribute {
 };
 
 /*
+ * Parent class for all attack types. Each attack type should derive from this
+ * and set its own accuracy and damage.
+ */
+public class Attack {
+    public Attack(int d, double a) {
+        damage = d;
+        accuracy = a;
+    }
+    public int damage;         // Value between 0 and 100 (%).
+    public double accuracy;    // Percentage between 0 and 1.
+};
+
+public class Punch : Attack {
+    Punch() : base(20, 0.8) {}
+};
+
+public class Kick : Attack {
+    Kick() : base(60, 0.4) {}
+};
+
+public class Tackle : Attack {
+    Tackle() : base(40, 0.6) {}
+};
+
+/*
+ * Stores the action that a player took (an element type and attack),
+ * and the result of the action.
+ */
+public struct PlayerActionResult {
+    PlayerActionResult(Element element, Attack attack, bool successful) {
+        this.element = element;
+        this.attack = attack;
+        this.successful = successful;
+    }
+    public Element element;    // Element that the player chose.
+    public Attack attack;      // The attack chosen by the player.
+    public bool successful;    // Did the attack hit?
+};
+
+/*
+ * Enemy does not have differentiated attacks (at least for now), and
+ * simply has a base accuracy. We also keep track of the player's element
+ * when the enemy attacked them, because this affects the enemy's
+ * accuracy.
+ */
+public struct EnemyActionResult {
+    EnemyActionResult(bool successful, Element player_element_during) {
+        this.successful = successful;
+        this.player_element_during = player_element_during;
+        this.accuracy = 0.6; // This is fixed for now.
+    }
+
+    public Element player_element_during;  // The PLAYER's element when the enemy attacked them.
+    public double accuracy;                // Accuracy BEFORE any effectiveness changes are made.
+    public bool successful;                // Did enemy attack hit you?
+};
+
+/*
  * Provides a helper method for comparing two elements.
  */
-public class ElementOrdering {
+public static class ElementOrdering {
     /*
      * Returns +1 if el1 is effective against el2
      * Returns 0 if el1 is neutral against el2
