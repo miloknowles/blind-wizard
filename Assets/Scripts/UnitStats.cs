@@ -7,18 +7,25 @@ public class UnitStats : MonoBehaviour, IComparable
 {
     public float health;
     public float attack;
-    public float defense;
-    public float speed;
 
     public int nextActTurn;
     private bool dead = false;
 
-    public enum Element { Fire, Water, Earth, Air}
-    public Element currElement;
+    public Primitives.Element currElement;
+    public Primitives.Attribute currAttribute;
+
+    private void Start()
+    {
+        health = Stats.EnemyStats.Health;
+        attack = Stats.EnemyStats.Attack;
+        currElement = Stats.EnemyStats.Element;
+        currAttribute = Stats.EnemyStats.Attribute;
+    }
 
     public void calculateNextActTurn(int currentTurn)
     {
-        this.nextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
+        //this.nextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
+        this.nextActTurn = currentTurn + 100;
     }
 
     public int CompareTo(object otherStats)
@@ -33,25 +40,25 @@ public class UnitStats : MonoBehaviour, IComparable
 
     public int superEffective(UnitStats other)
     {
-        if(currElement == Element.Fire)
+        if(currElement == Primitives.Element.Fire)
         {
-            if(other.currElement == Element.Fire || other.currElement == Element.Earth)
+            if(other.currElement == Primitives.Element.Fire || other.currElement == Primitives.Element.Earth)
             {
                 return 0;
-            } else if (other.currElement == Element.Water)
+            } else if (other.currElement == Primitives.Element.Water)
             {
                 return -1;
             } else
             {
                 return 1;
             }
-        } else if (currElement == Element.Water)
+        } else if (currElement == Primitives.Element.Water)
         {
-            if (other.currElement == Element.Water || other.currElement == Element.Air)
+            if (other.currElement == Primitives.Element.Water || other.currElement == Primitives.Element.Air)
             {
                 return 0;
             }
-            else if (other.currElement == Element.Earth)
+            else if (other.currElement == Primitives.Element.Earth)
             {
                 return -1;
             }
@@ -59,13 +66,13 @@ public class UnitStats : MonoBehaviour, IComparable
             {
                 return 1;
             }
-        } else if (currElement == Element.Earth)
+        } else if (currElement == Primitives.Element.Earth)
         {
-            if (other.currElement == Element.Fire || other.currElement == Element.Earth)
+            if (other.currElement == Primitives.Element.Fire || other.currElement == Primitives.Element.Earth)
             {
                 return 0;
             }
-            else if (other.currElement == Element.Air)
+            else if (other.currElement == Primitives.Element.Air)
             {
                 return -1;
             }
@@ -75,11 +82,11 @@ public class UnitStats : MonoBehaviour, IComparable
             }
         } else 
         {
-            if (other.currElement == Element.Air || other.currElement == Element.Water)
+            if (other.currElement == Primitives.Element.Air || other.currElement == Primitives.Element.Water)
             {
                 return 0;
             }
-            else if (other.currElement == Element.Fire)
+            else if (other.currElement == Primitives.Element.Fire)
             {
                 return -1;
             }
