@@ -45,6 +45,7 @@ public static class ProbabilitySystem {
             {Attribute.Scaly, 0.1}, {Attribute.Furry, 0.5}, {Attribute.Smooth, 0.4} } }
     };
 
+
     //============================ PUBLIC API ===========================================
 
     /*
@@ -59,39 +60,37 @@ public static class ProbabilitySystem {
     /*
      * Add noise to probability distributions
      */ 
-    public ElementDistribution RandomizeRegionDistribution(Region region)
+    public void RandomizeRegionDistributions()
     {
-        ElementDistribution p_element_given_region = P_ELEMENT_GIVEN_REGION[region];
+        for (Region region in P_ELEMENT_GIVEN_REGION.Keys)
+        {
+            List<double> noise;
+			var random = new Random();
 
-		List<double> noise = new List<double> { 0.1, 0.1, -0.1, -0.1 };
-		var random = new Random();
-
-		if (region != Primitives.Region.MMTTG)
-		{
-			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
+			if (region != Primitives.Region.MMTTG)
 			{
-				int index = random.Next(noise.Count);
-				Primitives.Element elt = eltProb.Key;
-				p_element_given_region[elt] += noise[index];
-				noise.RemoveAt(index);
-			}
-		}
-		else
-		{
-			noise = new List<double> { -0.1, 0.1, 0 };
-			foreach (KeyValuePair<Primitives.Element, double> eltProb in p_element_given_region)
-			{
-				int index = random.Next(noise.Count);
-				Primitives.Element elt = eltProb.Key;
-				if (elt != Primitives.Element.Water)
+                noise = new List<double> { 0.1, 0.1, -0.1, -0.1 };
+                foreach (Element elt in P_ELEMENT_GIVEN_REGION[region].Keys)
 				{
-					p_element_given_region[elt] += noise[index];
+					int index = random.Next(noise.Count);
+                    P_ELEMENT_GIVEN_REGION[region][elt] += noise[index];
 					noise.RemoveAt(index);
 				}
 			}
-		}
-
-        return p_element_given_region;
+			else
+			{
+				noise = new List<double> { -0.1, 0.1, 0 };
+                foreach (Element elt in P_ELEMENT_GIVEN_REGION[region].Keys)
+				{
+					int index = random.Next(noise.Count);
+					if (elt != Primitives.Element.Water)
+					{
+                        P_ELEMENT_GIVEN_REGION[region][elt] += noise[index];
+						noise.RemoveAt(index);
+					}
+				}
+			}
+        }
     }
 
     /*
@@ -99,7 +98,7 @@ public static class ProbabilitySystem {
      */
     public Element SampleElementGivenRegion(Region region)
     {
-        ElementDistribution p_element_given_region = RandomizeRegionDistribution(region);
+        ElementDistribution p_element_given_region = P_ELEMENT_GIVEN_REGION[region];
         
         // Get aligned lists of elements and their associated probabilities.
         // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.keys?view=netframework-4.8
