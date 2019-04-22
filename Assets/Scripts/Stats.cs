@@ -36,7 +36,8 @@ public class Stats : MonoBehaviour
 
     public static class EnemyStats
     {
-        private static int health, attack, accuracy;
+        private static int health, attack;
+        private static float accuracy;
         private static Primitives.Element element;
         private static Primitives.Attribute attribute;
 
@@ -64,7 +65,7 @@ public class Stats : MonoBehaviour
             }
         }
 
-        public static int Accuracy
+        public static float Accuracy
         {
             get
             {

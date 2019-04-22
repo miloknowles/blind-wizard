@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour, IComparable
 {
-    public float health;
-    public float attack;
+    public int health;
+    public int attack;
+    public float accuracy;
 
     public int nextActTurn;
     private bool dead = false;
