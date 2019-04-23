@@ -14,6 +14,8 @@ using Primitives;
  * that need to access the owning game object.
  */
 public class ActorManager : MonoBehaviour, IComparable {
+    public GameObject statsPanel; // Should be set from Unity editor.
+
     public int NextActTurn { get; private set; }
 
     // Both the player and enemy have health and an element.
@@ -27,6 +29,8 @@ public class ActorManager : MonoBehaviour, IComparable {
 
         NextActTurn = 0;
         Debug.Log("Initialized gameObject with tag: " + this.gameObject.tag);
+
+        statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
     }
 
     /*
@@ -56,6 +60,7 @@ public class ActorManager : MonoBehaviour, IComparable {
     public void ReceiveDamage(int amount)
     {
         this.Health -= amount;
+        statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
     }
 
     // For now, return to the MapScene whenever the enemy or player dies.
