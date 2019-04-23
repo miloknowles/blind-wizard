@@ -60,15 +60,15 @@ public class Attack {
 };
 
 public class Punch : Attack {
-    Punch() : base(20, 0.8) {}
+    public Punch() : base(20, 0.8) {}
 };
 
 public class Kick : Attack {
-    Kick() : base(60, 0.4) {}
+    public Kick() : base(60, 0.4) {}
 };
 
 public class Tackle : Attack {
-    Tackle() : base(40, 0.6) {}
+    public Tackle() : base(40, 0.6) {}
 };
 
 /*

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,21 +13,28 @@ using Primitives;
  * Eventually, this manager could also handle animations, and other updates
  * that need to access the owning game object.
  */
-public class ActorManager : MonoBehaviour {
-    private int nextActTurn;
+public class ActorManager : MonoBehaviour, IComparable {
+    public int NextActTurn { get; private set; }
 
     // Both the player and enemy have health and an element.
     // The player can switch its Element with each attack.
-    public int Health { get; private set; }
-    public Element Element { get; private set; }
-    public bool Dead { get; private set; }
+    public int Health { get; set; }
+    public Element Element { get; set; }
+
+    public void Start()
+    {
+        Health = 100; // TODO: set this from GameStateManager eventually.
+
+        NextActTurn = 0;
+        Debug.Log("Initialized gameObject with tag: " + this.gameObject.tag);
+    }
 
     /*
      * Perform a specified attack on another ActorManager.
      * This function will simulate whether the attack hits,
      * and apply the damage to the target if so.
      */
-    bool DoAttack(ActorManager target, Attack attack)
+    public bool DoAttack(ActorManager target, Attack attack)
     {
         System.Random r = new System.Random();
         double random_val = r.NextDouble();
@@ -53,7 +61,7 @@ public class ActorManager : MonoBehaviour {
     // For now, return to the MapScene whenever the enemy or player dies.
     public void OnDestroy()
     {
-        SceneManager.LoadSceneAsync("MapScene");
+        // SceneManager.LoadSceneAsync("MapScene");
     }
 
     /*
@@ -66,13 +74,13 @@ public class ActorManager : MonoBehaviour {
      */
     public void CalculateNextActTurn(int currentTurn)
     {
-        //this.nextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
-        this.nextActTurn = currentTurn + 100;
+        //this.NextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
+        this.NextActTurn = currentTurn + 100;
     }
 
     // Allows actors to be sorted based on their next act turn.
-    public int CompareTo(ActorManager other)
+    public int CompareTo(object other)
     {
-        return nextActTurn.CompareTo(other.nextActTurn);
+        return NextActTurn.CompareTo(((ActorManager)other).NextActTurn);
     }
 };

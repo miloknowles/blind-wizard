@@ -12,6 +12,15 @@ public class GameStateManager : MonoBehaviour
      * Note: player stats should be retrieved from here when entering the battle scene.
      */
     public static class PlayerStats {
+        // Initialize player stats at the start of a game.
+        // To ensure that this is only done once, we maintain an isInitialized flag.
+        public static void Initialize() {
+            if (!isInitialized) {
+                isInitialized = true;
+                Health = 100;
+            }
+        }
+        public static bool isInitialized = false;
         public static int Health { get; set; }
         public static Region Region { get; set; }
     };
