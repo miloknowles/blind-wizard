@@ -124,9 +124,10 @@ GameObject:
   - component: {fileID: 106570974}
   - component: {fileID: 106570973}
   - component: {fileID: 106570972}
+  - component: {fileID: 106570975}
   m_Layer: 5
   m_Name: ChooseWaterButton
-  m_TagString: Untagged
+  m_TagString: SelectElementButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +231,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106570970}
   m_CullTransparentMesh: 0
+--- !u!114 &106570975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106570970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButtonElement: 1
 --- !u!1 &312845547
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,9 +256,10 @@ GameObject:
   - component: {fileID: 312845551}
   - component: {fileID: 312845550}
   - component: {fileID: 312845549}
+  - component: {fileID: 312845552}
   m_Layer: 5
   m_Name: ChooseAirButton
-  m_TagString: Untagged
+  m_TagString: SelectElementButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,6 +363,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312845547}
   m_CullTransparentMesh: 0
+--- !u!114 &312845552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312845547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButtonElement: 3
 --- !u!1 &379543251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,9 +1815,10 @@ GameObject:
   - component: {fileID: 1566286099}
   - component: {fileID: 1566286098}
   - component: {fileID: 1566286097}
+  - component: {fileID: 1566286100}
   m_Layer: 5
   m_Name: ChooseFireButton
-  m_TagString: Untagged
+  m_TagString: SelectElementButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1893,6 +1922,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566286095}
   m_CullTransparentMesh: 0
+--- !u!114 &1566286100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566286095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButtonElement: 0
 --- !u!1 &1690776849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,9 +1947,10 @@ GameObject:
   - component: {fileID: 1690776853}
   - component: {fileID: 1690776852}
   - component: {fileID: 1690776851}
+  - component: {fileID: 1690776854}
   m_Layer: 5
   m_Name: ChooseEarthButton
-  m_TagString: Untagged
+  m_TagString: SelectElementButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2011,6 +2054,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690776849}
   m_CullTransparentMesh: 0
+--- !u!114 &1690776854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690776849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisButtonElement: 2
 --- !u!1 &1741628363
 GameObject:
   m_ObjectHideFlags: 0

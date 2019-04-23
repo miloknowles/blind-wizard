@@ -9,6 +9,7 @@ TagManager:
   - DeadUnit
   - SelectActionButton
   - DoActionButton
+  - SelectElementButton
   layers:
   - Default
   - TransparentFX

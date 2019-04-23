@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
     //====================== STORE UI STATE ==========================
     private Attack currentAttack;
     private GameObject[] selectActionButtons;   // UI buttons to choose Punch, Kick, Tackle
+    private GameObject[] selectElementButtons;  // UI buttons to select element for an attack.
     private GameObject[] doActionButtons;       // UI buttons to hit an enemy with an attack.
     
     // Eventually, we may want to support multiple enemies and spawn them programmatically.
@@ -86,8 +87,10 @@ public class BattleManager : MonoBehaviour
         // Retrieve all of the UI buttons so that we can enable/disable them at the right time.
         selectActionButtons = GameObject.FindGameObjectsWithTag("SelectActionButton");
         doActionButtons = GameObject.FindGameObjectsWithTag("DoActionButton");
+        selectElementButtons = GameObject.FindGameObjectsWithTag("SelectElementButton");
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
+        foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
 
         playerManager = playerObject.GetComponent<ActorManager>();
         enemyManager = enemyObject.GetComponent<ActorManager>();
@@ -131,8 +134,8 @@ public class BattleManager : MonoBehaviour
 
     private void HandlePlayerTurn(GameObject player_unit)
     {
-        // Enable the select attack buttons.
-        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+        // First, enable the select element buttons.
+        foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
     }
 
     private void HandleEnemyTurn(GameObject enemy_unit)
@@ -142,6 +145,13 @@ public class BattleManager : MonoBehaviour
     }
 
     //===================== CALLBACKS TO ALLOW UI TO INTERACT WITH BATTLEMANAGER ==================
+    public void UISelectPlayerElement(Element selected)
+    {
+        // After choosing an element, the player is allowed to select an attack.
+        // The choose element buttons will still be enabled in case they want to switch.
+        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+    }
+
     public void UISelectPlayerAttack(Attack selected)
     {
         currentAttack = selected;
@@ -152,7 +162,9 @@ public class BattleManager : MonoBehaviour
 
     public void UIDoPlayerAttack()
     {
+        // Disable all Player choice buttons after action is taken (until next turn).
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
+        foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
         playerManager.DoAttack(enemyManager, currentAttack);
