@@ -39,20 +39,25 @@ public class ActorManager : MonoBehaviour, IComparable {
      */
     public bool DoAttack(ActorManager target, Attack attack)
     {
+        Debug.Log(">>> Attacking with " + Element + " + " + attack);
+
         System.Random r = new System.Random();
         double random_val = r.NextDouble();
 
         int matchup_multiplier = ElementOrdering.Compare(this.Element, target.Element);
         double accuracy = attack.accuracy + matchup_multiplier * Constants.SUPER_EFFECTIVE_ACCURACY_BONUS;
 
+        Debug.Log(">>> Target Element: " + target.Element);
+        Debug.Log(">>> Accuracy: " + accuracy);
+
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
-            Debug.Log("Attack hit!");
+            Debug.Log(">>> Attack hit!");
             target.ReceiveDamage(attack.damage);
             return true;
         }
 
-        Debug.Log("Attack missed!");
+        Debug.Log(">>> Attack missed!");
         return false;
     }
 

@@ -38,8 +38,6 @@ public class BattleManager : MonoBehaviour
      */
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("SceneLoaded");
-
         // Initialize the PlayerStats if they haven't been initialized already.
         // For now, the only important thing this does is set player health to
         // 100 at the start of the game. Internally, the GameStateManager will
@@ -101,8 +99,6 @@ public class BattleManager : MonoBehaviour
 
     public void NextTurn()
     {
-        Debug.Log("Actors remaining: " + actorQueue_.Count);
-
         // Pop the next unit from actorQueue_.
         if (actorQueue_.Count > 0) {
             ActorManager acting_unit_stats = actorQueue_[0];
@@ -117,10 +113,10 @@ public class BattleManager : MonoBehaviour
                 actorQueue_.Sort();
 
                 if (acting_unit.tag == "PlayerUnit") {
-                    Debug.Log("Player unit acting");
+                    Debug.Log("======= Player unit acting =======");
                     HandlePlayerTurn(acting_unit);
                 } else {
-                    Debug.Log("Enemy unit acting");
+                    Debug.Log("======== Enemy unit acting =======");
                     HandleEnemyTurn(acting_unit); // TODO: turn this into a coroutine eventually!
                 }
             
@@ -150,6 +146,10 @@ public class BattleManager : MonoBehaviour
         // After choosing an element, the player is allowed to select an attack.
         // The choose element buttons will still be enabled in case they want to switch.
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+
+        // The ActorManager for the player is responsible for knowing it's current element,
+        // so we need to update that.
+        playerManager.Element = selected;
     }
 
     public void UISelectPlayerAttack(Attack selected)
