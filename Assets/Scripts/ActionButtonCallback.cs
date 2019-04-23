@@ -18,6 +18,8 @@ public class ActionButtonCallback : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Setting up button with attack: " + thisButtonAttack);
+
         // Set up click event handler.
         this.gameObject.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
         
