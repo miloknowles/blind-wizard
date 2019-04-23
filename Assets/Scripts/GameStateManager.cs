@@ -32,11 +32,17 @@ public class GameStateManager : MonoBehaviour
      * here; the code in the battle scene expects to read what type of enemy to 
      * render and face the player against from here.
      */
-    public static class EnemyStats {
+    public static class UpcomingEnemyStats {
         public static int Health { get; set; }
-        public static int Damage { get; set; }
-        public static double Accuracy { get; set; }
         public static Attribute Attribute { get; set; }
         public static Element Element { get; set; }
+
+        // TODO: take in a region here eventually, just making something to test...
+        public static void Generate()
+        {
+            Health = 100;
+            Attribute = Primitives.Attribute.Furry;
+            Element = Element.Earth;
+        }
     };
 }

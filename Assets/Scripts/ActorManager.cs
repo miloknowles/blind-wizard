@@ -22,12 +22,19 @@ public class ActorManager : MonoBehaviour, IComparable {
 
     // Both the player and enemy have health and an element.
     // The player can switch its Element with each attack.
-    public int Health { get; set; }
+    private int health_;
+    public int Health {
+        get { return health_; }
+        set {
+            health_ = value;
+            statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(health_);
+        }
+    }
     public Element Element { get; set; }
+    public Primitives.Attribute Attribute { get; set; }
 
     public void Start()
     {
-        Health = 100; // TODO: set this from GameStateManager eventually.
         NextActTurn = 0;
 
         // Since health will be loaded in from GameStateManager, we want to update here.

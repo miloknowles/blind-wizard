@@ -42,10 +42,7 @@ public class BattleManager : MonoBehaviour
         // For now, the only important thing this does is set player health to
         // 100 at the start of the game. Internally, the GameStateManager will
         // make sure that this happens at most once!
-        GameStateManager.PlayerStats.Initialize();
-        
-        // Retrieve all of the UI elements that the player interacts with during battle.
-        GameObject HUD = GameObject.Find("HUDCanvas");
+        GameStateManager.PlayerStats.Initialize();        
     }
 
     // Start is called before the first frame update (and after OnSceneLoaded).
@@ -92,6 +89,13 @@ public class BattleManager : MonoBehaviour
 
         playerManager = playerObject.GetComponent<ActorManager>();
         enemyManager = enemyObject.GetComponent<ActorManager>();
+
+        // Copy the global persisted player / enemy states into the player and enemy instances.
+        // TODO: copy them back at the end of the battle!
+        playerManager.Health = GameStateManager.PlayerStats.Health;
+        enemyManager.Element = GameStateManager.UpcomingEnemyStats.Element;
+        enemyManager.Health = GameStateManager.UpcomingEnemyStats.Health;
+        enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
 
         // Go the the first turn.
         this.NextTurn();
