@@ -131,12 +131,12 @@ public class BattleManager : MonoBehaviour
 
     private void HandleEnemyTurn(GameObject enemy_unit)
     {
+        this.NextTurn();
     }
 
     //===================== CALLBACKS TO ALLOW UI TO INTERACT WITH BATTLEMANAGER ==================
     public void UISelectPlayerAttack(Attack selected)
     {
-        Debug.Log("Selected a Player attack from the UI");
         currentAttack = selected;
 
         // Enable the do attack button for each enemy (right now only one).
@@ -147,6 +147,7 @@ public class BattleManager : MonoBehaviour
     {
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
-        Debug.Log("UIPlayerAttack()"); 
+
+        this.NextTurn();
     }
 }
