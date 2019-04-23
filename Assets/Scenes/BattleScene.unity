@@ -1236,6 +1236,11 @@ PrefabInstance:
       propertyPath: m_Text
       value: Tackle
       objectReference: {fileID: 0}
+    - target: {fileID: 3716308658865691886, guid: 06fe7703fba43104397732ecc7135a7c,
+        type: 3}
+      propertyPath: thisButtonAttack
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fe7703fba43104397732ecc7135a7c, type: 3}
 --- !u!224 &1059005183 stripped
@@ -1478,6 +1483,11 @@ PrefabInstance:
       value: 'Kick
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716308658865691886, guid: 06fe7703fba43104397732ecc7135a7c,
+        type: 3}
+      propertyPath: thisButtonAttack
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fe7703fba43104397732ecc7135a7c, type: 3}

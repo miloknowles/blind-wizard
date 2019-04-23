@@ -58,6 +58,7 @@ public class ActorManager : MonoBehaviour, IComparable {
 
         Debug.Log(">>> Target Element: " + target.Element);
         Debug.Log(">>> Accuracy: " + accuracy);
+        Debug.Log(">>> Damage: " + attack.damage);
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
