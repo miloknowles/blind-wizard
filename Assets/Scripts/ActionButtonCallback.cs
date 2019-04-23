@@ -30,6 +30,8 @@ public class ActionButtonCallback : MonoBehaviour
         } else {
             attack = new Tackle();
         }
+
+        // this.gameObject.GetComponent<Button>().interactable = false;
     }
 
     private void OnClick()
