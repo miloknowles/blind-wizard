@@ -26,10 +26,9 @@ public class ActorManager : MonoBehaviour, IComparable {
     public void Start()
     {
         Health = 100; // TODO: set this from GameStateManager eventually.
-
         NextActTurn = 0;
-        Debug.Log("Initialized gameObject with tag: " + this.gameObject.tag);
 
+        // Since health will be loaded in from GameStateManager, we want to update here.
         statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
     }
 
