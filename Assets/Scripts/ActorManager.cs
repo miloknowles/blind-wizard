@@ -61,12 +61,14 @@ public class ActorManager : MonoBehaviour, IComparable {
     {
         this.Health -= amount;
         statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
+
+        if (this.IsDead()) { Destroy(this); }
     }
 
     // For now, return to the MapScene whenever the enemy or player dies.
     public void OnDestroy()
     {
-        // SceneManager.LoadSceneAsync("MapScene");
+        SceneManager.LoadSceneAsync("MapScene");
     }
 
     /*

@@ -118,7 +118,7 @@ public class BattleManager : MonoBehaviour
                     HandlePlayerTurn(acting_unit);
                 } else {
                     Debug.Log("Enemy unit acting");
-                    HandleEnemyTurn(acting_unit);
+                    HandleEnemyTurn(acting_unit); // TODO: turn this into a coroutine eventually!
                 }
             
             // If the acting unit is dead, skip its turn.
