@@ -59,6 +59,11 @@ public class Attack {
     public double accuracy;    // Percentage between 0 and 1.
 };
 
+public class GenericEnemyAttack : Attack {
+    // TODO: set these params from Constants.
+    public GenericEnemyAttack() : base(20, 0.6) {}
+};
+
 public class Punch : Attack {
     public Punch() : base(20, 0.8) {}
 };

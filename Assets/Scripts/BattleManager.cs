@@ -17,8 +17,11 @@ public class BattleManager : MonoBehaviour
     
     // Eventually, we may want to support multiple enemies and spawn them programmatically.
     // For simplicity, I'm going to use a single enemy game object for now.
-    public GameObject enemyObject;
+
     public GameObject playerObject;
+    public GameObject enemyObject;
+    private ActorManager enemyManager;
+    private ActorManager playerManager;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
@@ -86,6 +89,9 @@ public class BattleManager : MonoBehaviour
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
+        playerManager = playerObject.GetComponent<ActorManager>();
+        enemyManager = enemyObject.GetComponent<ActorManager>();
+
         // Go the the first turn.
         this.NextTurn();
     }
@@ -131,6 +137,7 @@ public class BattleManager : MonoBehaviour
 
     private void HandleEnemyTurn(GameObject enemy_unit)
     {
+        enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
         this.NextTurn();
     }
 
@@ -147,6 +154,8 @@ public class BattleManager : MonoBehaviour
     {
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
+
+        playerManager.DoAttack(enemyManager, currentAttack);
 
         this.NextTurn();
     }
