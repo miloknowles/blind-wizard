@@ -117,7 +117,8 @@ public class BattleManager : MonoBehaviour
                     HandlePlayerTurn(acting_unit);
                 } else {
                     Debug.Log("======== Enemy unit acting =======");
-                    HandleEnemyTurn(acting_unit); // TODO: turn this into a coroutine eventually!
+                    IEnumerator coroutine = HandleEnemyTurn(acting_unit);
+                    StartCoroutine(coroutine);
                 }
             
             // If the acting unit is dead, skip its turn.
@@ -134,8 +135,13 @@ public class BattleManager : MonoBehaviour
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
     }
 
-    private void HandleEnemyTurn(GameObject enemy_unit)
+    /*
+     * Waits asynchronously for a few seconds before taking the enemy's turn.
+     */
+    private IEnumerator HandleEnemyTurn(GameObject enemy_unit)
     {
+        yield return new WaitForSeconds(2.0f);
+
         enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
         this.NextTurn();
     }

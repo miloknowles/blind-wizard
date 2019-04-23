@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Primitives;
 
@@ -14,7 +15,8 @@ using Primitives;
  * that need to access the owning game object.
  */
 public class ActorManager : MonoBehaviour, IComparable {
-    public GameObject statsPanel; // Should be set from Unity editor.
+    public GameObject statsPanel;   // Should be set from Unity editor.
+    public GameObject narratorText; // Should be set from Unity editor.
 
     public int NextActTurn { get; private set; }
 
@@ -52,12 +54,14 @@ public class ActorManager : MonoBehaviour, IComparable {
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
+            narratorText.GetComponent<Text>().text = this.name + " attack hit!";
             Debug.Log(">>> Attack hit!");
             target.ReceiveDamage(attack.damage);
             return true;
         }
 
         Debug.Log(">>> Attack missed!");
+        narratorText.GetComponent<Text>().text = this.name + " attack missed!";
         return false;
     }
 
