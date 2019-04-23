@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAction : MonoBehaviour
-{
-
+/*
+ * This script is attached to the Player object, and handles selecting and carrying
+ * out the attacks available to the player.
+ */
+public class PlayerAction : MonoBehaviour {
+        // Each attack has an associated Prefab.
         [SerializeField]
         private GameObject punch;
 
@@ -32,19 +35,16 @@ public class PlayerAction : MonoBehaviour
 
         public void SelectAttack(int type)
         {
-            if(type == 0)
-            {
+            if (type == 0) {
                 this.currentAttack = this.punch;
-            } else if (type == 1)
-            {
+            } else if (type == 1) {
                 this.currentAttack = this.kick;
-            } else
-            {
+            } else {
                 this.currentAttack = this.tackle;
             }
         }
 
-       public void Act(GameObject target)
+        public void Act(GameObject target)
         {
             this.currentAttack.GetComponent<AttackTarget>().hit(target);
         }

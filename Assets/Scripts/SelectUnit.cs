@@ -16,8 +16,7 @@ public class SelectUnit : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "BattleScene")
-        {
+        if (scene.name == "BattleScene") {
             GameObject HUD = GameObject.Find("HUD");
             this.actionsMenu = HUD.transform.Find("ActionMenu").gameObject;
             this.enemyUnitsMenu = HUD.transform.Find("EnemyMenu").gameObject;

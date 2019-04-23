@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * When an enemy is destroyed, transition back to the MapScene.
+ */
 public class KillEnemy : MonoBehaviour
 {
     public GameObject menuItem;

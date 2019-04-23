@@ -121,7 +121,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 149141519}
-  - component: {fileID: 149141518}
   m_Layer: 0
   m_Name: TurnSystem
   m_TagString: Untagged
@@ -129,20 +128,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &149141518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149141517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70631b7f9fd133c4eb4322430ef67239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionsMenu: {fileID: 1522527149}
-  enemyUnitsMenu: {fileID: 459811313}
 --- !u!4 &149141519
 Transform:
   m_ObjectHideFlags: 0
@@ -288,7 +273,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168027341}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d24401ae8d5b14da19d44868eeda9b, type: 3}
   m_Name: 
@@ -611,7 +596,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503647859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d24401ae8d5b14da19d44868eeda9b, type: 3}
   m_Name: 
@@ -1002,10 +987,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825073261}
-  - component: {fileID: 1825073260}
-  - component: {fileID: 1825073262}
-  - component: {fileID: 1825073263}
-  - component: {fileID: 1825073264}
   m_Layer: 0
   m_Name: Player
   m_TagString: PlayerUnit
@@ -1013,20 +994,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1825073260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825073259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787a7fc40feed354699cf0827e2b4c2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyUnitPrefab: {fileID: 8090931370476471407, guid: b3b132cc342ee9648bd191d24e65821b,
-    type: 3}
 --- !u!4 &1825073261
 Transform:
   m_ObjectHideFlags: 0
@@ -1041,51 +1008,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1825073262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825073259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d3a8b0c98416748b27c17159821082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  attack: 20
-  defense: 0
-  speed: 10
-  nextActTurn: 0
-  currElement: 0
---- !u!114 &1825073263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825073259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53aff59bf52dc734f99c97edf9b9fe44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1825073264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825073259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5adfc4b6ce20efa4e9c21a2d3debf784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  punch: {fileID: 3045980821370670794, guid: 6ebe8490cf261c640b72c91b71ee69ad, type: 3}
-  kick: {fileID: 4817679294703651771, guid: 0bb69270f6412284a9d451b1f0e006e2, type: 3}
-  tackle: {fileID: 5005031340520992979, guid: 5bd68298a6d5dea4597d4dc1eca468fa, type: 3}
 --- !u!1 &1952737422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1139,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952737422}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d24401ae8d5b14da19d44868eeda9b, type: 3}
   m_Name: 

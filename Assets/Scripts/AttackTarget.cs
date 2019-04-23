@@ -16,11 +16,9 @@ public class AttackTarget : MonoBehaviour
         UnitStats targetStats = target.GetComponent<UnitStats>();
 
         float hit = Random.value;
-        if(accuracy + ownerStats.superEffective(targetStats) >= hit)
-        {
+        if (accuracy + ownerStats.superEffective(targetStats) >= hit) {
             targetStats.recieveDamage(this.damage);
-        } else
-        {
+        } else {
             Debug.Log("Missed!");
         }
         GameObject.Find("TurnSystem").GetComponent<TurnSystem>().nextTurn();

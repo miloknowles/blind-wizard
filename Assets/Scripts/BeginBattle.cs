@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Handles the transition from the MapScene to the BattleScene.
+ */
 public class BeginBattle : MonoBehaviour
 {
     private Button b;

@@ -5,22 +5,24 @@ using UnityEngine;
 public class TurnSystem : MonoBehaviour
 {
     private List<UnitStats> unitsStats;
+
     [SerializeField]
-    private GameObject actionsMenu, enemyUnitsMenu;
+    private GameObject actionsMenu;     // Menu for choosing the player's action.
+
+    [SerializeField]
+    private GameObject enemyUnitsMenu;  // Menu for choosing an enemy to attack.
 
     void Start()
     {
         unitsStats = new List<UnitStats>();
         GameObject[] playerUnits = GameObject.FindGameObjectsWithTag("PlayerUnit");
-        foreach (GameObject playerUnit in playerUnits)
-        {
+        foreach (GameObject playerUnit in playerUnits) {
             UnitStats currentUnitStats = playerUnit.GetComponent<UnitStats>();
             currentUnitStats.calculateNextActTurn(0);
             unitsStats.Add(currentUnitStats);
         }
         GameObject[] enemyUnits = GameObject.FindGameObjectsWithTag("EnemyUnit");
-        foreach (GameObject enemyUnit in enemyUnits)
-        {
+        foreach (GameObject enemyUnit in enemyUnits) {
             UnitStats currentUnitStats = enemyUnit.GetComponent<UnitStats>();
             currentUnitStats.calculateNextActTurn(0);
             unitsStats.Add(currentUnitStats);
@@ -35,24 +37,22 @@ public class TurnSystem : MonoBehaviour
 
     public void nextTurn()
     {
+        // Pop the next unit from unitsStats.
         UnitStats currentUnitStats = unitsStats[0];
         unitsStats.Remove(currentUnitStats);
 
-        if (!currentUnitStats.isDead())
-        {
+        if (!currentUnitStats.isDead()) {
             GameObject currentUnit = currentUnitStats.gameObject;
 
+            // Calculate the next turn the currentUnit will act, and add it back to the queue.
             currentUnitStats.calculateNextActTurn(currentUnitStats.nextActTurn);
             unitsStats.Add(currentUnitStats);
             unitsStats.Sort();
 
-            if (currentUnit.tag == "PlayerUnit")
-            {
+            if (currentUnit.tag == "PlayerUnit") {
                 Debug.Log("Player unit acting");
                 currentUnit.GetComponent<SelectUnit>().selectCurrentUnit(currentUnit.gameObject);
-            }
-            else
-            {
+            } else {
                 Debug.Log("Enemy unit acting");
                 this.nextTurn();
             }

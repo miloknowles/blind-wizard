@@ -17,10 +17,10 @@ public class UnitStats : MonoBehaviour, IComparable
 
     private void Start()
     {
-        health = Stats.EnemyStats.Health;
-        attack = Stats.EnemyStats.Attack;
-        currElement = Stats.EnemyStats.Element;
-        currAttribute = Stats.EnemyStats.Attribute;
+        // health = Stats.EnemyStats.Health;
+        // attack = Stats.EnemyStats.Attack;
+        // currElement = Stats.EnemyStats.Element;
+        // currAttribute = Stats.EnemyStats.Attribute;
     }
 
     public void calculateNextActTurn(int currentTurn)
