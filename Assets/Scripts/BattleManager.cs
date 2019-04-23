@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Primitives;
 
@@ -9,10 +10,10 @@ using Primitives;
  */
 public class BattleManager : MonoBehaviour
 {
-    //====================== STORE UI STATE ===========================
-    private GameObject actionsMenu;
-    private GameObject enemyUnitsMenu;
+    //====================== STORE UI STATE ==========================
     private Attack currentAttack;
+    private GameObject[] selectActionButtons;   // UI buttons to choose Punch, Kick, Tackle
+    private GameObject[] doActionButtons;       // UI buttons to hit an enemy with an attack.
     
     // Eventually, we may want to support multiple enemies and spawn them programmatically.
     // For simplicity, I'm going to use a single enemy game object for now.
@@ -43,8 +44,6 @@ public class BattleManager : MonoBehaviour
         
         // Retrieve all of the UI elements that the player interacts with during battle.
         GameObject HUD = GameObject.Find("HUDCanvas");
-        this.actionsMenu = HUD.transform.Find("ActionMenu").gameObject;
-        this.enemyUnitsMenu = HUD.transform.Find("EnemyMenu").gameObject;
     }
 
     // Start is called before the first frame update (and after OnSceneLoaded).
@@ -81,9 +80,11 @@ public class BattleManager : MonoBehaviour
         // Sort the queue such that the unit with lowest next turn to act is at position zero.
         actorQueue_.Sort();
 
-        // Disable action menus.
-        this.actionsMenu.SetActive(false);
-        this.enemyUnitsMenu.SetActive(false);
+        // Retrieve all of the UI buttons so that we can enable/disable them at the right time.
+        selectActionButtons = GameObject.FindGameObjectsWithTag("SelectActionButton");
+        doActionButtons = GameObject.FindGameObjectsWithTag("DoActionButton");
+        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
+        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
         // Go the the first turn.
         this.NextTurn();
@@ -108,10 +109,10 @@ public class BattleManager : MonoBehaviour
 
                 if (acting_unit.tag == "PlayerUnit") {
                     Debug.Log("Player unit acting");
-                    // this.NextTurn();
+                    HandlePlayerTurn(acting_unit);
                 } else {
                     Debug.Log("Enemy unit acting");
-                    // this.NextTurn();
+                    HandleEnemyTurn(acting_unit);
                 }
             
             // If the acting unit is dead, skip its turn.
@@ -122,14 +123,30 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    private void HandlePlayerTurn(GameObject player_unit)
+    {
+        // Enable the select attack buttons.
+        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+    }
+
+    private void HandleEnemyTurn(GameObject enemy_unit)
+    {
+    }
+
+    //===================== CALLBACKS TO ALLOW UI TO INTERACT WITH BATTLEMANAGER ==================
     public void UISelectPlayerAttack(Attack selected)
     {
         Debug.Log("Selected a Player attack from the UI");
         currentAttack = selected;
+
+        // Enable the do attack button for each enemy (right now only one).
+        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = true; }
     }
 
-    public void UIPlayerAttack()
+    public void UIDoPlayerAttack()
     {
+        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
+        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
         Debug.Log("UIPlayerAttack()"); 
     }
 }

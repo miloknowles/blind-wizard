@@ -124,9 +124,10 @@ GameObject:
   - component: {fileID: 582424883}
   - component: {fileID: 582424882}
   - component: {fileID: 582424881}
+  - component: {fileID: 582424884}
   m_Layer: 0
   m_Name: AttackEnemyButton
-  m_TagString: Untagged
+  m_TagString: DoActionButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +231,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582424879}
   m_CullTransparentMesh: 0
+--- !u!114 &582424884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582424879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c264eab6080dd4b902577bc455b955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &682550369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3716308658865691882, guid: 06fe7703fba43104397732ecc7135a7c,
@@ -327,7 +340,7 @@ GameObject:
   - component: {fileID: 728375991}
   - component: {fileID: 728375990}
   m_Layer: 5
-  m_Name: PanelTitle
+  m_Name: ChooseActionPanelTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,6 +484,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TackleActionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716308658865691883, guid: 06fe7703fba43104397732ecc7135a7c,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectActionButton
       objectReference: {fileID: 0}
     - target: {fileID: 3716308658865691882, guid: 06fe7703fba43104397732ecc7135a7c,
         type: 3}
@@ -693,6 +711,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: KickActionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716308658865691883, guid: 06fe7703fba43104397732ecc7135a7c,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectActionButton
       objectReference: {fileID: 0}
     - target: {fileID: 3716308658865691882, guid: 06fe7703fba43104397732ecc7135a7c,
         type: 3}
@@ -1182,6 +1205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PunchActionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716308658865691883, guid: 06fe7703fba43104397732ecc7135a7c,
+        type: 3}
+      propertyPath: m_TagString
+      value: SelectActionButton
       objectReference: {fileID: 0}
     - target: {fileID: 3716308658865691882, guid: 06fe7703fba43104397732ecc7135a7c,
         type: 3}

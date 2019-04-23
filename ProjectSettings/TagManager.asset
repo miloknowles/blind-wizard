@@ -7,6 +7,8 @@ TagManager:
   - PlayerUnit
   - EnemyUnit
   - DeadUnit
+  - SelectActionButton
+  - DoActionButton
   layers:
   - Default
   - TransparentFX
