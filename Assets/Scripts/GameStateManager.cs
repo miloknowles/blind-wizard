@@ -23,6 +23,33 @@ public class GameStateManager : MonoBehaviour
         public static bool isInitialized = false;
         public static int Health { get; set; }
         public static Region Region { get; set; }
+        //In order [Fire, Air, Earth, Water]
+        public static Dictionary<Primitives.Region, int[]> samples = new Dictionary<Primitives.Region, int[]>();
+
+        public static void AddSamples(Primitives.Region region, int amt)
+        {
+            if (!samples.ContainsKey(region))
+                samples[region] = new int[] { 0, 0, 0, 0 };
+            for (int i = 0; i < amt; i++)
+            {
+                Element el = ProbabilitySystem.SampleElementGivenRegion(region);
+                switch (el)
+                {
+                    case Element.Fire:
+                        samples[region][0]++;
+                        break;
+                    case Element.Air:
+                        samples[region][1]++;
+                        break;
+                    case Element.Earth:
+                        samples[region][2]++;
+                        break;
+                    case Element.Water:
+                        samples[region][3]++;
+                        break;
+                }
+            }
+        }
     };
 
     /*
