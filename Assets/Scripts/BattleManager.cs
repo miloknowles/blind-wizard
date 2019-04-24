@@ -16,6 +16,7 @@ public class BattleManager : MonoBehaviour
     private GameObject[] selectElementButtons;  // UI buttons to select element for an attack.
     private GameObject[] doActionButtons;       // UI buttons to hit an enemy with an attack.
     
+    
     // Eventually, we may want to support multiple enemies and spawn them programmatically.
     // For simplicity, I'm going to use a single enemy game object for now.
 
@@ -23,6 +24,9 @@ public class BattleManager : MonoBehaviour
     public GameObject enemyObject;
     private ActorManager enemyManager;
     private ActorManager playerManager;
+
+    public GameObject UIRegionText;
+    public GameObject UIAttributeText;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
@@ -42,7 +46,7 @@ public class BattleManager : MonoBehaviour
         // For now, the only important thing this does is set player health to
         // 100 at the start of the game. Internally, the GameStateManager will
         // make sure that this happens at most once!
-        GameStateManager.PlayerStats.Initialize();        
+        GameStateManager.PlayerStats.Initialize();
     }
 
     // Start is called before the first frame update (and after OnSceneLoaded).
@@ -93,6 +97,10 @@ public class BattleManager : MonoBehaviour
         enemyManager.Element = GameStateManager.UpcomingEnemyStats.Element;
         enemyManager.Health = GameStateManager.UpcomingEnemyStats.Health;
         enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
+
+        // Update the region and attribute displays.
+        UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
+        UIRegionText.GetComponent<Text>().text = "Region: " + GameStateManager.MapState.CurrentRegion;
 
         // Go the the first turn.
         this.NextTurn();

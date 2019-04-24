@@ -5,6 +5,10 @@ using Primitives;
 
 public class GameStateManager : MonoBehaviour
 {
+    public static class MapState {
+        public static Region CurrentRegion { get; set; }
+    };
+
     /*
      * The player state is stored in this static class. This is a way to persist
      * the player state globally across multiple scenes.
@@ -68,6 +72,7 @@ public class GameStateManager : MonoBehaviour
         public static void Generate()
         {
             Region random_region = ProbabilitySystem.SampleRegionUniform();
+            MapState.CurrentRegion = random_region;
 
             Health = 100;
             Element = ProbabilitySystem.SampleElementGivenRegion(random_region);
