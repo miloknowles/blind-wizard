@@ -38,7 +38,7 @@ public enum Element {
 };
 
 /*
- * Defines the four visual attributes that types can have.
+ * Defines the three visual attributes that types can have.
  */
 public enum Attribute {
     Scaly,

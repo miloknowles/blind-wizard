@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 1825073259}
   thisButtonElement: 1
 --- !u!1 &189020629
 GameObject:
@@ -533,7 +534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 1825073259}
   thisButtonElement: 3
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.5058824, g: 0.9607844, b: 0.9803922, a: 1}
 --- !u!1 &379543251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 1825073259}
   thisButtonElement: 0
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1690776849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,7 +2322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb14de1c629e53498590f820ed28bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 1825073259}
   thisButtonElement: 2
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.21960784, g: 0.81960785, b: 0.29803923, a: 1}
 --- !u!1 &1741628363
 GameObject:
   m_ObjectHideFlags: 0
