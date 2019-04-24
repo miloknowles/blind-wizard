@@ -69,10 +69,7 @@ public class BattleManager : MonoBehaviour
         foreach (GameObject unit in enemy_units) {
             ActorManager m = unit.GetComponent<ActorManager>();
 
-            // Enemy should always start with 100 health for now.
-            m.Health = 100;
-
-            m.CalculateNextActTurn(0);
+            m.CalculateNextActTurn(1);
             actorQueue_.Add(m);
         }
 
@@ -103,6 +100,8 @@ public class BattleManager : MonoBehaviour
 
     public void NextTurn()
     {
+        Debug.Log("actor queue: " + actorQueue_.Count);
+
         // Pop the next unit from actorQueue_.
         if (actorQueue_.Count > 0) {
             ActorManager acting_unit_stats = actorQueue_[0];
@@ -112,7 +111,9 @@ public class BattleManager : MonoBehaviour
                 GameObject acting_unit = acting_unit_stats.gameObject;
 
                 // Calculate the next turn the acting_unit_object will act, and add it back to the queue.
-                acting_unit_stats.CalculateNextActTurn(acting_unit_stats.NextActTurn);
+                int current_turn = acting_unit_stats.NextActTurn;
+                acting_unit_stats.CalculateNextActTurn(current_turn);
+                // acting_unit_stats.SetNextActTurn(current_turn + 2); // Alternative between player and enemy for now.
                 actorQueue_.Add(acting_unit_stats);
                 actorQueue_.Sort();
 
@@ -144,6 +145,7 @@ public class BattleManager : MonoBehaviour
      */
     private IEnumerator HandleEnemyTurn(GameObject enemy_unit)
     {
+        Debug.Log("HandleEnemyTurn()");
         yield return new WaitForSeconds(2.0f);
 
         enemyManager.DoAttack(playerManager, new GenericEnemyAttack());

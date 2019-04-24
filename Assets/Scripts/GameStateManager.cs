@@ -40,9 +40,17 @@ public class GameStateManager : MonoBehaviour
         // TODO: take in a region here eventually, just making something to test...
         public static void Generate()
         {
+            Region random_region = ProbabilitySystem.SampleRegionUniform();
+
             Health = 100;
-            Attribute = Primitives.Attribute.Furry;
-            Element = Element.Earth;
+            Element = ProbabilitySystem.SampleElementGivenRegion(random_region);
+            Attribute = ProbabilitySystem.SampleAttributeGivenElement(Element);
+
+            Debug.Log("============= GENERATED RANDOM BATTLE =============");
+            Debug.Log("Region: " + random_region);
+            Debug.Log("Enemy Element: " + Element);
+            Debug.Log("Enemy Attribute: " + Attribute);
+            Debug.Log("===================================================");
         }
     };
 }

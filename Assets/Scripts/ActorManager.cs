@@ -18,7 +18,13 @@ public class ActorManager : MonoBehaviour, IComparable {
     public GameObject statsPanel;   // Should be set from Unity editor.
     public GameObject narratorText; // Should be set from Unity editor.
 
-    public int NextActTurn { get; private set; }
+    private int nextActTurn_ = 0;
+    public int NextActTurn {
+        get { return nextActTurn_; }
+        private set {
+            nextActTurn_ = value;
+        }
+    }
 
     // Both the player and enemy have health and an element.
     // The player can switch its Element with each attack.
@@ -35,7 +41,7 @@ public class ActorManager : MonoBehaviour, IComparable {
 
     public void Start()
     {
-        NextActTurn = 0;
+        // NextActTurn = 0;
 
         // Since health will be loaded in from GameStateManager, we want to update here.
         statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
@@ -98,7 +104,8 @@ public class ActorManager : MonoBehaviour, IComparable {
     public void CalculateNextActTurn(int currentTurn)
     {
         //this.NextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
-        this.NextActTurn = currentTurn + 100;
+        this.NextActTurn = (currentTurn + 2);
+        Debug.Log("NextActTurn updated (" + this.name + "): " + this.NextActTurn.ToString());
     }
 
     // Allows actors to be sorted based on their next act turn.
