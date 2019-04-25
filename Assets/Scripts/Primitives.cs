@@ -61,19 +61,19 @@ public class Attack {
 
 public class GenericEnemyAttack : Attack {
     // TODO: set these params from Constants.
-    public GenericEnemyAttack() : base(20, 0.6) {}
+    public GenericEnemyAttack() : base(30, 0.6) {}
 };
 
 public class Punch : Attack {
-    public Punch() : base(20, 0.8) {}
+    public Punch() : base(20, 0.7) {}
 };
 
 public class Kick : Attack {
-    public Kick() : base(60, 0.4) {}
+    public Kick() : base(40, 0.5) {}
 };
 
 public class Tackle : Attack {
-    public Tackle() : base(40, 0.6) {}
+    public Tackle() : base(60, 0.3) {}
 };
 
 /*
@@ -139,6 +139,22 @@ public static class ElementOrdering {
             return 0;
         }
     }
+
+    public static Element GetEffective(Element el)
+    {
+        int enum_val = (int)el;
+        int num_elements = System.Enum.GetNames(typeof(Element)).Length;
+        int effective_idx = (enum_val == 0) ? (num_elements - 1) : (enum_val - 1);
+        return (Element)effective_idx;
+    }
+
+    public static Element GetIneffective(Element el)
+    {
+        int enum_val = (int)el;
+        int num_elements = System.Enum.GetNames(typeof(Element)).Length;
+        return (Element)((enum_val + 1) % num_elements);
+    }
 };
+
 
 } // namespace Primitives
