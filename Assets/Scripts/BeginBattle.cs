@@ -22,6 +22,6 @@ public class BeginBattle : MonoBehaviour
     {
         // Right before going to the battle, we need to set up the upcoming enemy.
         GameStateManager.UpcomingEnemyStats.Generate();
-        SceneManager.LoadSceneAsync("BattleScene");
+        SceneManager.LoadScene("BattleScene");
     }
 }

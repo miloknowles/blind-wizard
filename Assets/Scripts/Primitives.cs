@@ -51,29 +51,31 @@ public enum Attribute {
  * and set its own accuracy and damage.
  */
 public class Attack {
-    public Attack(int d, double a) {
+    public Attack(int d, double a, string name) {
         damage = d;
         accuracy = a;
+        this.name = name;
     }
     public int damage;         // Value between 0 and 100 (%).
     public double accuracy;    // Percentage between 0 and 1.
+    public string name = "Attack";
 };
 
 public class GenericEnemyAttack : Attack {
     // TODO: set these params from Constants.
-    public GenericEnemyAttack() : base(30, 0.6) {}
+    public GenericEnemyAttack() : base(30, 0.6, "GenericEnemyAttack") {}
 };
 
 public class Punch : Attack {
-    public Punch() : base(20, 0.7) {}
+    public Punch() : base(20, 0.7, "Punch") {}
 };
 
 public class Kick : Attack {
-    public Kick() : base(40, 0.5) {}
+    public Kick() : base(40, 0.5, "Kick") {}
 };
 
 public class Tackle : Attack {
-    public Tackle() : base(60, 0.3) {}
+    public Tackle() : base(60, 0.3, "Tackle") {}
 };
 
 /*
@@ -81,7 +83,7 @@ public class Tackle : Attack {
  * and the result of the action.
  */
 public struct PlayerActionResult {
-    PlayerActionResult(Element element, Attack attack, bool successful) {
+    public PlayerActionResult(Element element, Attack attack, bool successful) {
         this.element = element;
         this.attack = attack;
         this.successful = successful;
@@ -98,7 +100,7 @@ public struct PlayerActionResult {
  * accuracy.
  */
 public struct EnemyActionResult {
-    EnemyActionResult(bool successful, Element player_element_during) {
+    public EnemyActionResult(bool successful, Element player_element_during) {
         this.successful = successful;
         this.player_element_during = player_element_during;
         this.accuracy = 0.6; // This is fixed for now.

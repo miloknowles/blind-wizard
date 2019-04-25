@@ -27,6 +27,7 @@ public class BattleManager : MonoBehaviour
 
     public GameObject UIRegionText;
     public GameObject UIAttributeText;
+    public GameObject UIMoveLogMenu;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
@@ -109,8 +110,6 @@ public class BattleManager : MonoBehaviour
 
     public void NextTurn()
     {
-        Debug.Log("actor queue: " + actorQueue_.Count);
-
         // Pop the next unit from actorQueue_.
         if (actorQueue_.Count > 0) {
             ActorManager acting_unit_stats = actorQueue_[0];
@@ -122,7 +121,6 @@ public class BattleManager : MonoBehaviour
                 // Calculate the next turn the acting_unit_object will act, and add it back to the queue.
                 int current_turn = acting_unit_stats.NextActTurn;
                 acting_unit_stats.CalculateNextActTurn(current_turn);
-                // acting_unit_stats.SetNextActTurn(current_turn + 2); // Alternative between player and enemy for now.
                 actorQueue_.Add(acting_unit_stats);
                 actorQueue_.Sort();
 
@@ -154,10 +152,15 @@ public class BattleManager : MonoBehaviour
      */
     private IEnumerator HandleEnemyTurn(GameObject enemy_unit)
     {
-        Debug.Log("HandleEnemyTurn()");
         yield return new WaitForSeconds(2.0f);
 
-        enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
+        bool successful = enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
+
+        // It's critical that the playerManager.Element doesn't change between when the enemy
+        // does its attack and when this action result is added to the move log.
+        EnemyActionResult enemy_result = new EnemyActionResult(successful, playerManager.Element);
+        UIMoveLogMenu.GetComponent<MoveLogManager>().AppendEnemyLogEntry(enemy_result);
+
         this.NextTurn();
     }
 
@@ -188,7 +191,9 @@ public class BattleManager : MonoBehaviour
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
-        playerManager.DoAttack(enemyManager, currentAttack);
+        bool successful = playerManager.DoAttack(enemyManager, currentAttack);
+        PlayerActionResult result = new PlayerActionResult(playerManager.Element, currentAttack, successful);
+        UIMoveLogMenu.GetComponent<MoveLogManager>().AppendPlayerLogEntry(result);
 
         this.NextTurn();
     }

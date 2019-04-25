@@ -54,7 +54,7 @@ public class ActorManager : MonoBehaviour, IComparable {
      */
     public bool DoAttack(ActorManager target, Attack attack)
     {
-        Debug.Log(">>> Attacking with " + Element + " + " + attack);
+        // Debug.Log(">>> Attacking with " + Element + " + " + attack);
 
         System.Random r = new System.Random();
         double random_val = r.NextDouble();
@@ -62,20 +62,21 @@ public class ActorManager : MonoBehaviour, IComparable {
         int matchup_multiplier = ElementOrdering.Compare(this.Element, target.Element);
         double accuracy = attack.accuracy + matchup_multiplier * Constants.SUPER_EFFECTIVE_ACCURACY_BONUS;
 
-        Debug.Log(">>> Target Element: " + target.Element);
-        Debug.Log(">>> Accuracy: " + accuracy);
-        Debug.Log(">>> Damage: " + attack.damage);
+        // Debug.Log(">>> Target Element: " + target.Element);
+        // Debug.Log(">>> Accuracy: " + accuracy);
+        // Debug.Log(">>> Damage: " + attack.damage);
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
             narratorText.GetComponent<Text>().text = this.name + " attack hit!";
-            Debug.Log(">>> Attack hit!");
+            // Debug.Log(">>> Attack hit!");
             target.ReceiveDamage(attack.damage);
             return true;
         }
 
-        Debug.Log(">>> Attack missed!");
+        // Debug.Log(">>> Attack missed!");
         narratorText.GetComponent<Text>().text = this.name + " attack missed!";
+
         return false;
     }
 
@@ -90,7 +91,7 @@ public class ActorManager : MonoBehaviour, IComparable {
     // For now, return to the MapScene whenever the enemy or player dies.
     public void OnDestroy()
     {
-        SceneManager.LoadSceneAsync("MapScene");
+        SceneManager.LoadScene("MapScene");
     }
 
     /*
@@ -100,12 +101,13 @@ public class ActorManager : MonoBehaviour, IComparable {
 
     /*
      * Used by the BattleManager to decide which actor should go next.
+     * Currently, the player and enemy alternate, so the next turn that they should
+     * act is incremented by two. If we move to multiple players / enemies this will
+     * break!!!
      */
     public void CalculateNextActTurn(int currentTurn)
     {
-        //this.NextActTurn = currentTurn + (int)Math.Ceiling(100.0f / this.speed);
         this.NextActTurn = (currentTurn + 2);
-        Debug.Log("NextActTurn updated (" + this.name + "): " + this.NextActTurn.ToString());
     }
 
     // Allows actors to be sorted based on their next act turn.
