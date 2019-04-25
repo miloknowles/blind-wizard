@@ -37,6 +37,7 @@ public class BattleManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;  // Set up a callback for when the scene is loaded.
     }
 
+     
     /*
      * Gets called BEFORE any of the script Start() methods.
      */
