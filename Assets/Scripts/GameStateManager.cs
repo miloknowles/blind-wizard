@@ -25,6 +25,8 @@ public class GameStateManager : MonoBehaviour
             }
         }
         public static bool isInitialized = false;
+        public static bool samplesInitialized = false;
+
         public static int Health { get; set; }
         public static Region Region { get; set; }
         //In order [Fire, Air, Earth, Water]
@@ -32,27 +34,30 @@ public class GameStateManager : MonoBehaviour
 
         public static void AddSamples(Primitives.Region region, int amt)
         {
+            PlayerStats.samplesInitialized = true;
             if (!samples.ContainsKey(region))
-                samples[region] = new int[] { 0, 0, 0, 0 };
+                PlayerStats.samples[region] = new int[] { 0, 0, 0, 0 };
             for (int i = 0; i < amt; i++)
             {
                 Element el = ProbabilitySystem.SampleElementGivenRegion(region);
+                Debug.Log(el);
                 switch (el)
                 {
                     case Element.Fire:
-                        samples[region][0]++;
+                        PlayerStats.samples[region][0]++;
                         break;
                     case Element.Air:
-                        samples[region][1]++;
+                        PlayerStats.samples[region][1]++;
                         break;
                     case Element.Earth:
-                        samples[region][2]++;
+                        PlayerStats.samples[region][2]++;
                         break;
                     case Element.Water:
-                        samples[region][3]++;
+                        PlayerStats.samples[region][3]++;
                         break;
                 }
             }
+            Debug.Log(GameStateManager.PlayerStats.samples[region][0] + " " + GameStateManager.PlayerStats.samples[region][1] + " " + GameStateManager.PlayerStats.samples[region][2] + " " + GameStateManager.PlayerStats.samples[region][3]);
         }
     };
 
