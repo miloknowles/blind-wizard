@@ -27,8 +27,7 @@ public class BeginBattle : MonoBehaviour
         if (!GameStateManager.PlayerStats.samplesInitialized) {
             foreach (Primitives.Region reg in System.Enum.GetValues(typeof(Primitives.Region))) {
                 Debug.Log(reg);
-                GameStateManager.PlayerStats.AddSamples(reg, 15);
-                Debug.Log(GameStateManager.PlayerStats.samples[reg][0] + " " + GameStateManager.PlayerStats.samples[reg][1] + " " + GameStateManager.PlayerStats.samples[reg][2] + " " + GameStateManager.PlayerStats.samples[reg][3]);
+                GameStateManager.PlayerStats.AddSamplesForRegion(reg, 15);
             }
         }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Primitives;
 
+/*
+ * UI Panel that displays the player and enemy actions and their results.
+ */
 public class MoveLogManager : MonoBehaviour
 {
     private List<GameObject> entries = new List<GameObject>();

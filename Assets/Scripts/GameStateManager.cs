@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Primitives;
 
+using ElementSamples = System.Collections.Generic.Dictionary<Primitives.Element, int>;
+
 public class GameStateManager : MonoBehaviour
 {
     public static class MapState {
@@ -29,35 +31,30 @@ public class GameStateManager : MonoBehaviour
 
         public static int Health { get; set; }
         public static Region Region { get; set; }
-        //In order [Fire, Air, Earth, Water]
-        public static Dictionary<Primitives.Region, int[]> samples = new Dictionary<Primitives.Region, int[]>();
 
-        public static void AddSamples(Primitives.Region region, int amt)
+        //In order [Fire, Air, Earth, Water]
+        public static Dictionary<Primitives.Region, ElementSamples> Samples =
+                new Dictionary<Primitives.Region, ElementSamples>();
+
+        /*
+         * Initializes a set of N element samples for a given region.
+         */
+        public static void AddSamplesForRegion(Primitives.Region region, int N)
         {
             PlayerStats.samplesInitialized = true;
-            if (!samples.ContainsKey(region))
-                PlayerStats.samples[region] = new int[] { 0, 0, 0, 0 };
-            for (int i = 0; i < amt; i++)
-            {
-                Element el = ProbabilitySystem.SampleElementGivenRegion(region);
-                Debug.Log(el);
-                switch (el)
-                {
-                    case Element.Fire:
-                        PlayerStats.samples[region][0]++;
-                        break;
-                    case Element.Air:
-                        PlayerStats.samples[region][1]++;
-                        break;
-                    case Element.Earth:
-                        PlayerStats.samples[region][2]++;
-                        break;
-                    case Element.Water:
-                        PlayerStats.samples[region][3]++;
-                        break;
-                }
+
+            if (!PlayerStats.Samples.ContainsKey(region)) {
+                PlayerStats.Samples[region] = new ElementSamples();
             }
-            Debug.Log(GameStateManager.PlayerStats.samples[region][0] + " " + GameStateManager.PlayerStats.samples[region][1] + " " + GameStateManager.PlayerStats.samples[region][2] + " " + GameStateManager.PlayerStats.samples[region][3]);
+            
+            foreach (Primitives.Element el in System.Enum.GetValues(typeof(Primitives.Element))) {
+                GameStateManager.PlayerStats.Samples[region][el] = 0;
+            }
+
+            for (int i = 0; i < N; i++) {
+                Element el = ProbabilitySystem.SampleElementGivenRegion(region);
+                PlayerStats.Samples[region][el] += 1;
+            }
         }
     };
 

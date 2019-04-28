@@ -25,8 +25,10 @@ public class BattleManager : MonoBehaviour
     private ActorManager enemyManager;
     private ActorManager playerManager;
 
+    //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
     public GameObject UIAttributeText;
+    public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
@@ -101,8 +103,20 @@ public class BattleManager : MonoBehaviour
         enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
 
         // Update the region and attribute displays.
+        Region currentRegion = GameStateManager.MapState.CurrentRegion;
         UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
-        UIRegionText.GetComponent<Text>().text = "Region: " + GameStateManager.MapState.CurrentRegion;
+        UIRegionText.GetComponent<Text>().text = "Region: " + currentRegion;
+
+        int num_water_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Water];
+        int num_fire_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Fire];
+        int num_air_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Air];
+        int num_earth_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Earth];
+
+        UIRegionSamplesText.GetComponent<Text>().text =
+            num_water_enemies.ToString() + " water type creatures\n" +
+            num_fire_enemies.ToString() + " fire type creatures\n" +
+            num_air_enemies.ToString() + " air type creatures\n" +
+            num_earth_enemies.ToString() + " earth type creatures\n";
 
         // Go the the first turn.
         this.NextTurn();
