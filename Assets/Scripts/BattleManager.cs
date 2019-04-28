@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour
     //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
     public GameObject UIAttributeText;
+    public GameObject UIRegionSamplesTitle;
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
 
@@ -111,6 +112,9 @@ public class BattleManager : MonoBehaviour
         int num_fire_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Fire];
         int num_air_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Air];
         int num_earth_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Earth];
+        int total_samples = num_water_enemies + num_fire_enemies + num_air_enemies + num_earth_enemies;
+
+        UIRegionSamplesTitle.GetComponent<Text>().text = "You have observed " + total_samples + " enemies:";
 
         UIRegionSamplesText.GetComponent<Text>().text =
             num_water_enemies.ToString() + " water type creatures\n" +

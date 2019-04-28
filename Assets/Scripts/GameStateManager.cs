@@ -32,7 +32,7 @@ public class GameStateManager : MonoBehaviour
         public static int Health { get; set; }
         public static Region Region { get; set; }
 
-        //In order [Fire, Air, Earth, Water]
+        // For each region, store a dictionary that maps each element to an int.
         public static Dictionary<Primitives.Region, ElementSamples> Samples =
                 new Dictionary<Primitives.Region, ElementSamples>();
 

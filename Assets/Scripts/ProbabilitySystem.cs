@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Primitives; // Namespace for Element, Region, Attribute.
 
 /*
@@ -15,6 +16,14 @@ using AttributeDistribution = System.Collections.Generic.Dictionary<Primitives.A
  * explicitly map from enum types to corresponding probability values.
  */
 public static class ProbabilitySystem {
+    private static System.Random rng = new System.Random();
+
+    // Since the ProbabilitySystem doesn't derive from MonoBehaviour (static classes cant)
+    // we need a way to call Debug.Log and see messages in the unity editor.
+    public class Debugger : MonoBehaviour {
+        public void Log(string line) { Debug.Log(line); }
+    };
+
     //========================== DISTRIBUTION DEFINITIONS ==============================
     // For each region, stores the probability of an enemy being each element.
     private static Dictionary<Region, ElementDistribution> P_ELEMENT_GIVEN_REGION = new Dictionary<Region, ElementDistribution>() {
@@ -214,11 +223,12 @@ public static class ProbabilitySystem {
      */
     private static int SampleIndex(List<double> distribution)
     {
-        System.Random r = new System.Random();
-        double random_val = r.NextDouble();
+        double random_val = rng.NextDouble();
 
         double sum = 0.0;
         for (int i = 0; i < distribution.Count; ++i) { sum += distribution[i]; }
+
+        // debug.Log("Sum: " + sum.ToString());
 
         double cumul = 0.0;
         for (int i = 0; i < distribution.Count; ++i) {
