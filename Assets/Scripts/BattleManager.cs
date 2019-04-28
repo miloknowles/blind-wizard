@@ -180,17 +180,13 @@ public class BattleManager : MonoBehaviour
     {
         currentAttack = selected;
 
-        // Enable the do attack button for each enemy (right now only one).
-        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = true; }
-    }
-
-    public void UIDoPlayerAttack()
-    {
-        // Disable all Player choice buttons after action is taken (until next turn).
+        // Disable all of the attack buttons (until enemy does its attack).
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
+        // Clicking any attack button triggers the attack. We then add the attack (and its result)
+        // to the UIMoveLogMenu.
         bool successful = playerManager.DoAttack(enemyManager, currentAttack);
         PlayerActionResult result = new PlayerActionResult(playerManager.Element, currentAttack, successful);
         UIMoveLogMenu.GetComponent<MoveLogManager>().AppendPlayerLogEntry(result);
