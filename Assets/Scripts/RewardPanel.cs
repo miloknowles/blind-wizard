@@ -13,8 +13,9 @@ public class RewardPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!GameStateManager.PlayerStats.isInitialized)
+        if (!GameStateManager.PlayerStats.isInitialized) {
             gameObject.SetActive(false);
+        }
         region = ProbabilitySystem.SampleRegionUniform();
         text.text = text.text.Replace("%", System.Enum.GetName(typeof(Primitives.Region), region));
         healButton.onClick.AddListener(HealButtonClicked);

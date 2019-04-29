@@ -91,7 +91,7 @@ public class BattleManager : MonoBehaviour
         selectElementButtons = GameObject.FindGameObjectsWithTag("SelectElementButton");
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
-        foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
+        foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
 
         playerManager = playerObject.GetComponent<ActorManager>();
         enemyManager = enemyObject.GetComponent<ActorManager>();
@@ -161,8 +161,9 @@ public class BattleManager : MonoBehaviour
 
     private void HandlePlayerTurn(GameObject player_unit)
     {
-        // First, enable the select element buttons.
+        // First, enable the select element buttons and the do action buttons.
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
+        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
     }
 
     /*
