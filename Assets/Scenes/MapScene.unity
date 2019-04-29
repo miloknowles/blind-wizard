@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 1100996149}
   - component: {fileID: 1100996151}
   - component: {fileID: 1100996150}
+  - component: {fileID: 1100996152}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -567,6 +568,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100996148}
   m_CullTransparentMesh: 0
+--- !u!114 &1100996152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100996148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349923a8430baf745b105778ace1da7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healButton: {fileID: 2136596798}
+  sampleButton: {fileID: 160864253}
+  text: {fileID: 719183282}
 --- !u!1 &1347018664
 GameObject:
   m_ObjectHideFlags: 0
