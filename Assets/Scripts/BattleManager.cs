@@ -64,7 +64,8 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Found " + player_units.Length + " player units and " + enemy_units.Length + " enemy units.");
 
         // Collect all "PlayerUnit" tagged game objects and add them to the action queue.
-        foreach (GameObject unit in player_units) {
+        foreach (GameObject unit in player_units)
+        {
             ActorManager m = unit.GetComponent<ActorManager>();
 
             // Set the player unit stats from the global game state!
@@ -97,7 +98,6 @@ public class BattleManager : MonoBehaviour
         enemyManager = enemyObject.GetComponent<ActorManager>();
 
         // Copy the global persisted player / enemy states into the player and enemy instances.
-        // TODO: copy them back at the end of the battle!
         playerManager.Health = GameStateManager.PlayerStats.Health;
         enemyManager.Element = GameStateManager.UpcomingEnemyStats.Element;
         enemyManager.Health = GameStateManager.UpcomingEnemyStats.Health;
@@ -112,6 +112,12 @@ public class BattleManager : MonoBehaviour
         int num_fire_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Fire];
         int num_air_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Air];
         int num_earth_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Earth];
+
+        Debug.Log(num_water_enemies);
+        Debug.Log(num_fire_enemies);
+        Debug.Log(num_air_enemies);
+        Debug.Log(num_earth_enemies);
+
         int total_samples = num_water_enemies + num_fire_enemies + num_air_enemies + num_earth_enemies;
 
         UIRegionSamplesTitle.GetComponent<Text>().text = "You have observed " + total_samples + " enemies:";
@@ -154,6 +160,7 @@ public class BattleManager : MonoBehaviour
             // If the acting unit is dead, skip its turn.
             } else {
                 Debug.Log("Actor was dead, skipping.");
+                GameStateManager.PlayerStats.Health = playerManager.Health;
                 this.NextTurn();
             }
         }

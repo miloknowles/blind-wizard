@@ -19,7 +19,7 @@ public class RewardPanel : MonoBehaviour
         region = ProbabilitySystem.SampleRegionUniform();
         text.text = text.text.Replace("%", System.Enum.GetName(typeof(Primitives.Region), region));
         healButton.onClick.AddListener(HealButtonClicked);
-        sampleButton.onClick.AddListener(HealButtonClicked);
+        sampleButton.onClick.AddListener(SampleButtonClicked);
     }
 
     void HealButtonClicked()

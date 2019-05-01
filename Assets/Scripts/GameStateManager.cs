@@ -21,10 +21,12 @@ public class GameStateManager : MonoBehaviour
         // Initialize player stats at the start of a game.
         // To ensure that this is only done once, we maintain an isInitialized flag.
         public static void Initialize() {
+            Debug.Log(GameStateManager.PlayerStats.Health);
             if (!isInitialized) {
                 isInitialized = true;
                 Health = 100;
             }
+            Debug.Log(GameStateManager.PlayerStats.Health);
         }
         public static bool isInitialized = false;
         public static bool samplesInitialized = false;
@@ -45,16 +47,21 @@ public class GameStateManager : MonoBehaviour
 
             if (!PlayerStats.Samples.ContainsKey(region)) {
                 PlayerStats.Samples[region] = new ElementSamples();
-            }
-            
-            foreach (Primitives.Element el in System.Enum.GetValues(typeof(Primitives.Element))) {
-                GameStateManager.PlayerStats.Samples[region][el] = 0;
+                foreach (Primitives.Element el in System.Enum.GetValues(typeof(Primitives.Element)))
+                {
+                    GameStateManager.PlayerStats.Samples[region][el] = 0;
+                }
             }
 
             for (int i = 0; i < N; i++) {
                 Element el = ProbabilitySystem.SampleElementGivenRegion(region);
                 PlayerStats.Samples[region][el] += 1;
             }
+
+            Debug.Log(PlayerStats.Samples[region][Element.Water]);
+            Debug.Log(PlayerStats.Samples[region][Element.Fire]);
+            Debug.Log(PlayerStats.Samples[region][Element.Air]);
+            Debug.Log(PlayerStats.Samples[region][Element.Earth]);
         }
     };
 
