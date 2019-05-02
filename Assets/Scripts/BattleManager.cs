@@ -10,6 +10,13 @@ using Primitives;
  */
 public class BattleManager : MonoBehaviour
 {
+    //====================== BATTLE STATES ===========================
+    public enum State {
+        IN_PROGRESS,
+        PLAYER_WON,
+        ENEMY_WON
+    };
+
     //====================== STORE UI STATE ==========================
     private Attack currentAttack;
     private GameObject[] selectActionButtons;   // UI buttons to choose Punch, Kick, Tackle
@@ -64,27 +71,22 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Found " + player_units.Length + " player units and " + enemy_units.Length + " enemy units.");
 
         // Collect all "PlayerUnit" tagged game objects and add them to the action queue.
+        // I don't think we'll ever have more than one PlayerUnit, but you never know...
         foreach (GameObject unit in player_units)
         {
             ActorManager m = unit.GetComponent<ActorManager>();
 
             // Set the player unit stats from the global game state!
             m.Health = GameStateManager.PlayerStats.Health;
-
-            m.CalculateNextActTurn(0);
             actorQueue_.Add(m);
         }
 
         // Collect all "EnemyUnit" tagged game objects and add them to the action queue.
+        // This allows us to have multiple enemies later on.
         foreach (GameObject unit in enemy_units) {
             ActorManager m = unit.GetComponent<ActorManager>();
-
-            m.CalculateNextActTurn(1);
             actorQueue_.Add(m);
         }
-
-        // Sort the queue such that the unit with lowest next turn to act is at position zero.
-        actorQueue_.Sort();
 
         // Retrieve all of the UI buttons so that we can enable/disable them at the right time.
         selectActionButtons = GameObject.FindGameObjectsWithTag("SelectActionButton");
@@ -94,11 +96,14 @@ public class BattleManager : MonoBehaviour
         foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
 
+        // IMPORTANT: If we ever switch to multiple players or enemies this will need to be handled differently!!!
+        // We would probably have to store a list of references to player / enemy ActorManager scripts
         playerManager = playerObject.GetComponent<ActorManager>();
         enemyManager = enemyObject.GetComponent<ActorManager>();
 
         // Copy the global persisted player / enemy states into the player and enemy instances.
         playerManager.Health = GameStateManager.PlayerStats.Health;
+        playerManager.Element = Element.Water; // This is the default in the UI!
         enemyManager.Element = GameStateManager.UpcomingEnemyStats.Element;
         enemyManager.Health = GameStateManager.UpcomingEnemyStats.Health;
         enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
@@ -108,6 +113,7 @@ public class BattleManager : MonoBehaviour
         UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
         UIRegionText.GetComponent<Text>().text = "Region: " + currentRegion;
 
+        // Show the available samples for this region (retrieve them from GameStateManager).
         int num_water_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Water];
         int num_fire_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Fire];
         int num_air_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Air];
@@ -128,13 +134,19 @@ public class BattleManager : MonoBehaviour
             num_air_enemies.ToString() + " air type creatures\n" +
             num_earth_enemies.ToString() + " earth type creatures\n";
 
-        // Go the the first turn.
+        // Go the the first turn of the battle.
         this.NextTurn();
     }
 
     public void NextTurn()
     {
-        // Pop the next unit from actorQueue_.
+        // Check if the game state is terminal.
+        State current_game_state = CheckBattleState();
+        if (current_game_state != State.IN_PROGRESS) {
+            HandleBattleOver(current_game_state);
+        }
+
+        // Pop the next unit from actorQueue_. It could be either a player or enemy unit.
         if (actorQueue_.Count > 0) {
             ActorManager acting_unit_stats = actorQueue_[0];
             actorQueue_.Remove(acting_unit_stats);
@@ -142,11 +154,9 @@ public class BattleManager : MonoBehaviour
             if (!acting_unit_stats.IsDead()) {
                 GameObject acting_unit = acting_unit_stats.gameObject;
 
-                // Calculate the next turn the acting_unit_object will act, and add it back to the queue.
-                int current_turn = acting_unit_stats.NextActTurn;
-                acting_unit_stats.CalculateNextActTurn(current_turn);
+                // Add the current actor back to the end of the queue. If we keep doing this,
+                // the order of the actors will repeat over and over again.
                 actorQueue_.Add(acting_unit_stats);
-                actorQueue_.Sort();
 
                 if (acting_unit.tag == "PlayerUnit") {
                     Debug.Log("======= Player unit acting =======");
@@ -160,10 +170,51 @@ public class BattleManager : MonoBehaviour
             // If the acting unit is dead, skip its turn.
             } else {
                 Debug.Log("Actor was dead, skipping.");
-                GameStateManager.PlayerStats.Health = playerManager.Health;
                 this.NextTurn();
             }
         }
+    }
+    
+    /*
+     * Check whether the player or enemy has won. This should be called after every action is
+     * taken. If there are no player or enemy units left, then this function indicates that
+     * the enemy or player has won.
+     */
+    private State CheckBattleState()
+    {
+        int player_units_remaining = 0;
+        int enemy_units_remaining = 0;
+
+        foreach(var actor_manager in actorQueue_) {
+            if (!actor_manager.IsDead()) {
+                if (actor_manager.gameObject.tag == "PlayerUnit") {
+                    ++player_units_remaining;
+                } else {
+                    ++enemy_units_remaining;
+                }
+            }
+        }
+        return (player_units_remaining == 0) ? State.ENEMY_WON :
+               (enemy_units_remaining == 0) ? State.PLAYER_WON : State.IN_PROGRESS;
+    }
+
+    /*
+     * Called when the battle is over, either because the player won or enemy won.
+     * Saves any important information back to the GameStateManager, and returns
+     * to the map scene.
+     */
+    private void HandleBattleOver(State terminal_state)
+    {
+        if (terminal_state == State.PLAYER_WON) {
+            Debug.Log("PLAYER WON");
+        } else {
+            Debug.Log("ENEMY WON");
+        }
+        
+        // Update the global GameStateManager with the player's health at the end
+        // of the battle.
+        GameStateManager.PlayerStats.Health = playerManager.Health;
+        SceneManager.LoadScene("MapScene");
     }
 
     private void HandlePlayerTurn(GameObject player_unit)

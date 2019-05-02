@@ -6,9 +6,21 @@ using System.Collections.Generic;
 // or C# things with the same name.
 namespace Primitives {
 
+/*
+ * Store all of the importants constants here so we only have to change them
+ * in one place. This should also make it easier to adjust game difficulty.
+ */
 static class Constants
 {
-    public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.2;
+    public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
+    public const int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
+    public const double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
+    public const int PUNCH_DAMAGE = 20;
+    public const double PUNCH_ACCURACY = 70.0;
+    public const int KICK_DAMAGE = 40;
+    public const double KICK_ACCURACY = 0.5;
+    public const int TACKLE_DAMAGE = 60;
+    public const double TACKLE_ACCURACY = 0.3;
 };
 
 /*
@@ -62,20 +74,22 @@ public class Attack {
 };
 
 public class GenericEnemyAttack : Attack {
-    // TODO: set these params from Constants.
-    public GenericEnemyAttack() : base(30, 0.6, "GenericEnemyAttack") {}
+    public GenericEnemyAttack() :
+        base(Constants.GENERIC_ENEMY_ATTACK_DAMAGE,
+             Constants.GENERIC_ENEMY_ATTACK_ACCURACY,
+             "GenericEnemyAttack") {}
 };
 
 public class Punch : Attack {
-    public Punch() : base(20, 0.7, "Punch") {}
+    public Punch() : base(Constants.PUNCH_DAMAGE, Constants.PUNCH_ACCURACY, "Punch") {}
 };
 
 public class Kick : Attack {
-    public Kick() : base(40, 0.5, "Kick") {}
+    public Kick() : base(Constants.KICK_DAMAGE, Constants.KICK_ACCURACY, "Kick") {}
 };
 
 public class Tackle : Attack {
-    public Tackle() : base(60, 0.3, "Tackle") {}
+    public Tackle() : base(Constants.TACKLE_DAMAGE, Constants.TACKLE_ACCURACY, "Tackle") {}
 };
 
 /*
@@ -103,7 +117,7 @@ public struct EnemyActionResult {
     public EnemyActionResult(bool successful, Element player_element_during) {
         this.successful = successful;
         this.player_element_during = player_element_during;
-        this.accuracy = 0.6; // This is fixed for now.
+        this.accuracy = Constants.GENERIC_ENEMY_ATTACK_ACCURACY;
     }
 
     public Element player_element_during;  // The PLAYER's element when the enemy attacked them.
