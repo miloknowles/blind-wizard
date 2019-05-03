@@ -10,6 +10,8 @@ TagManager:
   - SelectActionButton
   - DoActionButton
   - SelectElementButton
+  - BattleTriggerNode
+  - Wizard
   layers:
   - Default
   - TransparentFX

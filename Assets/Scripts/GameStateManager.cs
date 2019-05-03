@@ -9,6 +9,12 @@ public class GameStateManager : MonoBehaviour
 {
     public static class MapState {
         public static Region CurrentRegion { get; set; }
+
+        // The world coordinates of the wizard in the MapScene. This is saved right before battle
+        // and restored after leaving the battle.
+        public static Vector3 WizardPosition = new Vector3(0, 0, 0);
+        public static int BattlesCompleted = 0;
+        public static List<string> CompletedBattleTriggerNodeNames = new List<string>();
     };
 
     /*

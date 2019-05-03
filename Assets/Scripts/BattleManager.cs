@@ -214,7 +214,7 @@ public class BattleManager : MonoBehaviour
         // Update the global GameStateManager with the player's health at the end
         // of the battle.
         GameStateManager.PlayerStats.Health = playerManager.Health;
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene("BattleOverScene");
     }
 
     private void HandlePlayerTurn(GameObject player_unit)
