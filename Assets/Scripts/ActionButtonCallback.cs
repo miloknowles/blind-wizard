@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Primitives;
+using TMPro;
 
 /*
  * Attach this script to every action-choosing button.
@@ -15,19 +16,25 @@ public class ActionButtonCallback : MonoBehaviour
     public enum AttackButtonType { Punch, Kick, Tackle };
     public AttackButtonType thisButtonAttack;
     private Attack attack;
+    public TMP_Text damageText;
 
     void Start()
     {
+
         // Set up click event handler.
         this.gameObject.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
         
         if (thisButtonAttack == AttackButtonType.Punch) {
             attack = new Punch();
+            damageText.text = GameStateManager.GameConstants.PUNCH_DAMAGE + "hp";
         } else if (thisButtonAttack == AttackButtonType.Kick) {
             attack = new Kick();
+            damageText.text = GameStateManager.GameConstants.KICK_DAMAGE + "hp";
         } else {
             attack = new Tackle();
+            damageText.text = GameStateManager.GameConstants.TACKLE_DAMAGE + "hp";
         }
+
 
         // this.gameObject.GetComponent<Button>().interactable = false;
     }

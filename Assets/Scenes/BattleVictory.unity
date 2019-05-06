@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1019,7 +1019,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Heal 10 HP
+  m_text: Heal 20 HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7fab2d762e921423da201ba922f66202, type: 2}
   m_sharedMaterial: {fileID: 21125757256039500, guid: 7fab2d762e921423da201ba922f66202,
@@ -1276,7 +1276,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Heal 10 hp, increase $ATTACK$ damage by 10 hp, or get 15 more samples of
+  m_text: Heal 20 hp, increase $ATTACK$ damage by 10 hp, or get 15 more samples of
     the $REGION$ region?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7fab2d762e921423da201ba922f66202, type: 2}

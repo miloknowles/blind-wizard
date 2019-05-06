@@ -59,7 +59,7 @@ public class ActorManager : MonoBehaviour {
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
-            narratorText.GetComponent<Text>().text = this.name + " attack hit!";
+            narratorText.GetComponent<Text>().text = this.name + " attack hit! "+ attack.damage+"hp";
             target.ReceiveDamage(attack.damage);
             return true;
         }

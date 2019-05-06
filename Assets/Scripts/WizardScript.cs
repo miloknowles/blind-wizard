@@ -10,12 +10,15 @@ public class WizardScript : MonoBehaviour
 
     private Vector2 direction;
 
+    public GameObject UIActorStatsPanel;   // Should be set from Unity editor.
+
     void Start()
     {
         // If the position of the wizard was saved, load it in here.
         if (GameStateManager.MapState.BattlesCompleted >= 1) {
             this.gameObject.transform.position = GameStateManager.MapState.WizardPosition;
         }
+        UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(GameStateManager.PlayerStats.Health);
     }
 
     // Update is called once per frame

@@ -36,6 +36,7 @@ public class BattleManager : MonoBehaviour
     //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
     public GameObject UIEnemyAttributeText;
+    public GameObject UIEnemyMaxHealthText;
     public GameObject UIRegionSamplesTitle;
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
@@ -113,6 +114,7 @@ public class BattleManager : MonoBehaviour
         Region currentRegion = GameStateManager.MapState.CurrentRegion;
         UIEnemyAttributeText.GetComponent<TextMeshProUGUI>().text = enemyManager.Attribute.ToString() + " enemy";
         UIRegionText.GetComponent<TextMeshProUGUI>().text = currentRegion.ToString();
+        UIEnemyMaxHealthText.GetComponent<TextMeshProUGUI>().text = enemyManager.Health + "hp";
 
         // Show the available samples for this region (retrieve them from GameStateManager).
         int num_water_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Water];
@@ -141,12 +143,6 @@ public class BattleManager : MonoBehaviour
 
     public void NextTurn()
     {
-        // Check if the game state is terminal.
-        State current_game_state = CheckBattleState();
-        if (current_game_state != State.IN_PROGRESS) {
-            HandleBattleOver(current_game_state);
-        }
-
         // Pop the next unit from actorQueue_. It could be either a player or enemy unit.
         if (actorQueue_.Count > 0) {
             ActorManager acting_unit_stats = actorQueue_[0];
@@ -173,6 +169,12 @@ public class BattleManager : MonoBehaviour
                 Debug.Log("Actor was dead, skipping.");
                 this.NextTurn();
             }
+        }
+
+        // Check if the game state is terminal.
+        State current_game_state = CheckBattleState();
+        if (current_game_state != State.IN_PROGRESS) {
+            HandleBattleOver(current_game_state);
         }
     }
     

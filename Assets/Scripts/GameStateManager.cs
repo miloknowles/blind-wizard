@@ -24,7 +24,7 @@ public class GameStateManager : MonoBehaviour
     public static class GameConstants
     {
         public static double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
-        public static int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
+        public static int GENERIC_ENEMY_ATTACK_DAMAGE = 15;
         public static double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
         public static int PUNCH_DAMAGE = 20;
         public static double PUNCH_ACCURACY = 70.0;
@@ -117,7 +117,7 @@ public class GameStateManager : MonoBehaviour
             Region random_region = ProbabilitySystem.SampleRegionUniform();
             MapState.CurrentRegion = random_region;
 
-            Health = 100;
+            Health = 100 + 5*MapState.BattlesCompleted;
             Element = ProbabilitySystem.SampleElementGivenRegion(random_region);
             Attribute = ProbabilitySystem.SampleAttributeGivenElement(Element);
 

@@ -21,7 +21,7 @@ public class ChooseElementButtonCallback : MonoBehaviour
     void Start()
     {
         // Set up click event handler.
-        this.gameObject.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
+        GetComponent<Button>().onClick.AddListener(() => this.OnClick());
     }
 
     private void OnClick()
