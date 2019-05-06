@@ -35,7 +35,7 @@ public class BattleManager : MonoBehaviour
 
     //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
-    // public GameObject UIAttributeText;
+    public GameObject UIEnemyAttributeText;
     public GameObject UIRegionSamplesTitle;
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
@@ -111,8 +111,8 @@ public class BattleManager : MonoBehaviour
 
         // Update the region and attribute displays.
         Region currentRegion = GameStateManager.MapState.CurrentRegion;
-        // UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
-        UIRegionText.GetComponent<TextMeshProUGUI>().text = "Region: " + currentRegion;
+        UIEnemyAttributeText.GetComponent<TextMeshProUGUI>().text = enemyManager.Attribute.ToString() + " enemy";
+        UIRegionText.GetComponent<TextMeshProUGUI>().text = currentRegion.ToString();
 
         // Show the available samples for this region (retrieve them from GameStateManager).
         int num_water_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Water];
