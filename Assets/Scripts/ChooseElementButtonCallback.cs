@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Primitives;
+using TMPro;
 
 /*
  * This script should be attached to each of the buttons that the
@@ -10,49 +11,32 @@ using Primitives;
  */
 public class ChooseElementButtonCallback : MonoBehaviour
 {
-    public GameObject playerObject;
+    // Set these from the Unity editor.
+    public GameObject UIHUDCanvas;
+    public GameObject UIAccuracyModifierDescriptionText;
+    public GameObject UICurrentElementText;
     public Element thisButtonElement;
-    private ActorManager playerManager;
-    public Color defaultColor;
-    public Color selectedColor;
 
     // Start is called before the first frame update
     void Start()
     {
         // Set up click event handler.
         this.gameObject.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
-
-        // Get player object in order to monitor its element.
-        playerManager = playerObject.GetComponent<ActorManager>();
     }
 
     private void OnClick()
     {
         // Tell the BattleManager that an element was selected in the UI.
-        GameObject hudCanvas = GameObject.Find("HUDCanvas");
-        hudCanvas.GetComponent<BattleManager>().UISelectPlayerElement(this.thisButtonElement);
+        UIHUDCanvas.GetComponent<BattleManager>().UISelectPlayerElement(this.thisButtonElement);
 
         // Indicate that this button is selected.
-        GameObject currentElementText = GameObject.Find("CurrentElementText");
-        currentElementText.GetComponent<Text>().text = this.thisButtonElement.ToString();
+        UICurrentElementText.GetComponent<TextMeshProUGUI>().text = this.thisButtonElement.ToString();
 
         Element effectiveElement = ElementOrdering.GetEffective(thisButtonElement);
         Element ineffectiveElement = ElementOrdering.GetIneffective(thisButtonElement);
 
-        GameObject accuracyModifierDescriptor = GameObject.Find("AccuracyModifierDescription");
-        accuracyModifierDescriptor.GetComponent<Text>().text =
+        UIAccuracyModifierDescriptionText.GetComponent<TextMeshProUGUI>().text =
             "+30% accuracy against " + effectiveElement +
             "\n" + "-30% accuracy against " + ineffectiveElement;
-    }
-
-    private void Update()
-    {
-        ColorBlock allColors = this.gameObject.GetComponent<Button>().colors;
-        if (this.thisButtonElement == playerManager.Element) {
-            allColors.normalColor = selectedColor;
-        } else {
-            allColors.normalColor = defaultColor;
-        }
-        this.gameObject.GetComponent<Button>().colors = allColors;
     }
 }

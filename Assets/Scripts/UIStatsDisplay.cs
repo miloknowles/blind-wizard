@@ -11,20 +11,17 @@ using UnityEngine.UI;
  */
 public class UIStatsDisplay : MonoBehaviour
 {
+    public GameObject UIActorHealthBarSprite;
+
+    // Note: need to set these in the Unity editor!
+    // They were hardcoded before, which doesn't work now that the enemy and player have different
+    // health bar sizes.
+    public float healthBarInitialHeight;
+    public float healthBarInitialWidth;
+
     public void UpdateHealth(int value)
     {
-        GameObject health_value_text_object = transform.Find("HealthValue").gameObject;
-        health_value_text_object.GetComponent<Text>().text = value.ToString();
-
-        GameObject playerHealthBar;
-
-        if (transform.name == "PlayerStatsPanel") {
-            playerHealthBar = GameObject.Find("PlayerBarSprite").gameObject;
-        } else {
-            playerHealthBar = GameObject.Find("EnemyBarSprite").gameObject;
-        }
-
-        var rectTransform = playerHealthBar.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(150f * value / 100f, 20f);
+        var rectTransform = UIActorHealthBarSprite.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(this.healthBarInitialWidth * (float)value / 100f, this.healthBarInitialHeight);
     }
 }

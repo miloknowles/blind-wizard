@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 using Primitives;
 
 /*
@@ -34,7 +35,7 @@ public class BattleManager : MonoBehaviour
 
     //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
-    public GameObject UIAttributeText;
+    // public GameObject UIAttributeText;
     public GameObject UIRegionSamplesTitle;
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
@@ -110,8 +111,8 @@ public class BattleManager : MonoBehaviour
 
         // Update the region and attribute displays.
         Region currentRegion = GameStateManager.MapState.CurrentRegion;
-        UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
-        UIRegionText.GetComponent<Text>().text = "Region: " + currentRegion;
+        // UIAttributeText.GetComponent<Text>().text = "Attribute: " + enemyManager.Attribute;
+        UIRegionText.GetComponent<TextMeshProUGUI>().text = "Region: " + currentRegion;
 
         // Show the available samples for this region (retrieve them from GameStateManager).
         int num_water_enemies = GameStateManager.PlayerStats.Samples[currentRegion][Element.Water];
@@ -126,9 +127,9 @@ public class BattleManager : MonoBehaviour
 
         int total_samples = num_water_enemies + num_fire_enemies + num_air_enemies + num_earth_enemies;
 
-        UIRegionSamplesTitle.GetComponent<Text>().text = "You have observed " + total_samples + " enemies:";
+        UIRegionSamplesTitle.GetComponent<TextMeshProUGUI>().text = "You have observed " + total_samples + " enemies:";
 
-        UIRegionSamplesText.GetComponent<Text>().text =
+        UIRegionSamplesText.GetComponent<TextMeshProUGUI>().text =
             num_water_enemies.ToString() + " water type creatures\n" +
             num_fire_enemies.ToString() + " fire type creatures\n" +
             num_air_enemies.ToString() + " air type creatures\n" +

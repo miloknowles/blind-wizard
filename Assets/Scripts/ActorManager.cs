@@ -15,7 +15,7 @@ using Primitives;
  * that need to access the owning game object.
  */
 public class ActorManager : MonoBehaviour {
-    public GameObject statsPanel;   // Should be set from Unity editor.
+    public GameObject UIActorStatsPanel;   // Should be set from Unity editor.
     public GameObject narratorText; // Should be set from Unity editor.
 
     // The setter for health automatically updates the UI component that's
@@ -25,7 +25,7 @@ public class ActorManager : MonoBehaviour {
         get { return health_; }
         set {
             health_ = value;
-            statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(health_);
+            UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(health_);
         }
     }
 
@@ -40,7 +40,7 @@ public class ActorManager : MonoBehaviour {
     public void Start()
     {
         // Since health will be loaded in from GameStateManager, we want to update here.
-        statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
+        UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
     }
 
     /*
@@ -73,7 +73,7 @@ public class ActorManager : MonoBehaviour {
     {
         this.Health -= amount;
         this.Health = Mathf.Max(this.Health, 0); // Limit health from going below zero.
-        statsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
+        UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(Health);
 
         if (this.IsDead()) { Destroy(this); }
     }
