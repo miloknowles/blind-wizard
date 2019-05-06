@@ -55,7 +55,7 @@ public class ActorManager : MonoBehaviour {
         // Although the player doesn't know the enemy's element type, the attack simulator
         // here needs to know it.
         int matchup_multiplier = ElementOrdering.Compare(this.Element, target.Element);
-        double accuracy = attack.accuracy + matchup_multiplier * Constants.SUPER_EFFECTIVE_ACCURACY_BONUS;
+        double accuracy = attack.accuracy + matchup_multiplier * GameStateManager.GameConstants.SUPER_EFFECTIVE_ACCURACY_BONUS;
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {

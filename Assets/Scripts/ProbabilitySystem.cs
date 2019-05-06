@@ -151,7 +151,7 @@ public static class ProbabilitySystem {
             for (int el_i = 0; el_i < element_list.Count; ++i) {
                 Element possible_enemy_element = element_list[i];
                 int matchup_multiplier = ElementOrdering.Compare(action.element, possible_enemy_element);
-                double accuracy_vs_element = ClampZeroOne(action.attack.accuracy + matchup_multiplier * Constants.SUPER_EFFECTIVE_ACCURACY_BONUS);
+                double accuracy_vs_element = ClampZeroOne(action.attack.accuracy + matchup_multiplier * GameStateManager.GameConstants.SUPER_EFFECTIVE_ACCURACY_BONUS);
 
                 // For this possible enemy element, what is the probability of the outcome observed?
                 double p_of_result = action.successful ? accuracy_vs_element : (1.0 - accuracy_vs_element);
@@ -167,7 +167,7 @@ public static class ProbabilitySystem {
             for (int el_i = 0; el_i < element_list.Count; ++i) {
                 Element possible_enemy_element = element_list[i];
                 int matchup_multiplier = ElementOrdering.Compare(possible_enemy_element, action.player_element_during);
-                double accuracy_vs_player = ClampZeroOne(action.accuracy + matchup_multiplier * Constants.SUPER_EFFECTIVE_ACCURACY_BONUS);
+                double accuracy_vs_player = ClampZeroOne(action.accuracy + matchup_multiplier * GameStateManager.GameConstants.SUPER_EFFECTIVE_ACCURACY_BONUS);
 
                 // For this possible enemy element, what is the probability that their attack hit/missed?
                 double p_of_result = action.successful ? accuracy_vs_player : (1.0 - accuracy_vs_player);
@@ -221,7 +221,7 @@ public static class ProbabilitySystem {
      *
      * Returns a sampled INDEX from distribution.
      */
-    private static int SampleIndex(List<double> distribution)
+    public static int SampleIndex(List<double> distribution)
     {
         double random_val = rng.NextDouble();
 

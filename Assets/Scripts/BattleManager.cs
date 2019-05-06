@@ -206,16 +206,16 @@ public class BattleManager : MonoBehaviour
      */
     private void HandleBattleOver(State terminal_state)
     {
+        // Update the global GameStateManager with the player's health at the end of the battle.
+        GameStateManager.PlayerStats.Health = playerManager.Health;
+
         if (terminal_state == State.PLAYER_WON) {
             Debug.Log("PLAYER WON");
+            SceneManager.LoadScene("BattleVictory");
         } else {
             Debug.Log("ENEMY WON");
-        }
-        
-        // Update the global GameStateManager with the player's health at the end
-        // of the battle.
-        GameStateManager.PlayerStats.Health = playerManager.Health;
-        SceneManager.LoadScene("BattleOverScene");
+            SceneManager.LoadScene("GameOver");
+        }    
     }
 
     private void HandlePlayerTurn(GameObject player_unit)

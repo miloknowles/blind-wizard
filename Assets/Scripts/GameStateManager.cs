@@ -18,6 +18,34 @@ public class GameStateManager : MonoBehaviour
     };
 
     /*
+     * Store all of the importants constants here so we only have to change them
+     * in one place. This should also make it easier to adjust game difficulty.
+     */
+    public static class GameConstants
+    {
+        public static double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
+        public static int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
+        public static double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
+        public static int PUNCH_DAMAGE = 20;
+        public static double PUNCH_ACCURACY = 70.0;
+        public static int KICK_DAMAGE = 40;
+        public static double KICK_ACCURACY = 0.5;
+        public static int TACKLE_DAMAGE = 60;
+        public static double TACKLE_ACCURACY = 0.3;
+
+        public static void UpgradeDamage(Attack attack_to_upgrade, int hp)
+        {
+            if (attack_to_upgrade.GetType() == typeof(Punch)) {
+                PUNCH_DAMAGE += hp;
+            } else if (attack_to_upgrade.GetType() == typeof(Kick)) {
+                KICK_DAMAGE += hp;
+            } else if (attack_to_upgrade.GetType() == typeof(Tackle)) {
+                TACKLE_DAMAGE += hp;
+            }
+        }
+    };
+
+    /*
      * The player state is stored in this static class. This is a way to persist
      * the player state globally across multiple scenes.
      *

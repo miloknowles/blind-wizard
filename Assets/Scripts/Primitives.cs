@@ -6,22 +6,22 @@ using System.Collections.Generic;
 // or C# things with the same name.
 namespace Primitives {
 
-/*
- * Store all of the importants constants here so we only have to change them
- * in one place. This should also make it easier to adjust game difficulty.
- */
-static class Constants
-{
-    public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
-    public const int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
-    public const double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
-    public const int PUNCH_DAMAGE = 20;
-    public const double PUNCH_ACCURACY = 70.0;
-    public const int KICK_DAMAGE = 40;
-    public const double KICK_ACCURACY = 0.5;
-    public const int TACKLE_DAMAGE = 60;
-    public const double TACKLE_ACCURACY = 0.3;
-};
+// /*
+//  * Store all of the importants constants here so we only have to change them
+//  * in one place. This should also make it easier to adjust game difficulty.
+//  */
+// static class Constants
+// {
+//     public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
+//     public const int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
+//     public const double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
+//     public const int PUNCH_DAMAGE = 20;
+//     public const double PUNCH_ACCURACY = 70.0;
+//     public const int KICK_DAMAGE = 40;
+//     public const double KICK_ACCURACY = 0.5;
+//     public const int TACKLE_DAMAGE = 60;
+//     public const double TACKLE_ACCURACY = 0.3;
+// };
 
 /*
  * Defines all of the regions accessible in the game.
@@ -75,21 +75,24 @@ public class Attack {
 
 public class GenericEnemyAttack : Attack {
     public GenericEnemyAttack() :
-        base(Constants.GENERIC_ENEMY_ATTACK_DAMAGE,
-             Constants.GENERIC_ENEMY_ATTACK_ACCURACY,
+        base(GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_DAMAGE,
+             GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_ACCURACY,
              "GenericEnemyAttack") {}
 };
 
 public class Punch : Attack {
-    public Punch() : base(Constants.PUNCH_DAMAGE, Constants.PUNCH_ACCURACY, "Punch") {}
+    public Punch() : base(GameStateManager.GameConstants.PUNCH_DAMAGE,
+                          GameStateManager.GameConstants.PUNCH_ACCURACY, "Punch") {}
 };
 
 public class Kick : Attack {
-    public Kick() : base(Constants.KICK_DAMAGE, Constants.KICK_ACCURACY, "Kick") {}
+    public Kick() : base(GameStateManager.GameConstants.KICK_DAMAGE,
+                         GameStateManager.GameConstants.KICK_ACCURACY, "Kick") {}
 };
 
 public class Tackle : Attack {
-    public Tackle() : base(Constants.TACKLE_DAMAGE, Constants.TACKLE_ACCURACY, "Tackle") {}
+    public Tackle() : base(GameStateManager.GameConstants.TACKLE_DAMAGE,
+                           GameStateManager.GameConstants.TACKLE_ACCURACY, "Tackle") {}
 };
 
 /*
@@ -117,7 +120,7 @@ public struct EnemyActionResult {
     public EnemyActionResult(bool successful, Element player_element_during) {
         this.successful = successful;
         this.player_element_during = player_element_during;
-        this.accuracy = Constants.GENERIC_ENEMY_ATTACK_ACCURACY;
+        this.accuracy = GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_ACCURACY;
     }
 
     public Element player_element_during;  // The PLAYER's element when the enemy attacked them.
