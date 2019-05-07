@@ -38,5 +38,7 @@ public class ChooseElementButtonCallback : MonoBehaviour
         UIAccuracyModifierDescriptionText.GetComponent<TextMeshProUGUI>().text =
             "+30% accuracy against " + effectiveElement +
             "\n" + "-30% accuracy against " + ineffectiveElement;
+
+        this.transform.parent.gameObject.SetActive(false);
     }
 }
