@@ -151,7 +151,7 @@ public class GameStateManager : MonoBehaviour
             MapState.CurrentRegion = random_region;
 
             // The enemy health increases with each battle to raise difficulty.
-            Health = 100 + 5*MapState.BattlesCompleted;
+            Health = DetermineEnemyMaxHealth();
 
             Element = ProbabilitySystem.SampleElementGivenRegion(random_region);
             Attribute = ProbabilitySystem.SampleAttributeGivenElement(Element);
@@ -162,6 +162,11 @@ public class GameStateManager : MonoBehaviour
             Debug.Log("Enemy Attribute: " + Attribute);
             Debug.Log("Enemy Health: " + Health);
             Debug.Log("===================================================");
+        }
+
+        public static int DetermineEnemyMaxHealth()
+        {
+            return (100 + 5*MapState.BattlesCompleted);
         }
     };
 }

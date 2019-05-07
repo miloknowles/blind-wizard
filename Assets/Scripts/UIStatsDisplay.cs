@@ -18,10 +18,12 @@ public class UIStatsDisplay : MonoBehaviour
     // health bar sizes.
     public float healthBarInitialHeight;
     public float healthBarInitialWidth;
+    public bool determineEnemyMaxHealth = false;
 
     public void UpdateHealth(int value)
     {
         var rectTransform = UIActorHealthBarSprite.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(this.healthBarInitialWidth * (float)value / 100f, this.healthBarInitialHeight);
+        float max_value = determineEnemyMaxHealth ? (float)GameStateManager.UpcomingEnemyStats.DetermineEnemyMaxHealth() : 100.0f;
+        rectTransform.sizeDelta = new Vector2(this.healthBarInitialWidth * (float)value / max_value, this.healthBarInitialHeight);
     }
 }
