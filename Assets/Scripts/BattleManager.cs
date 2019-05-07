@@ -19,10 +19,8 @@ public class BattleManager : MonoBehaviour
     };
 
     //====================== STORE UI STATE ==========================
-    private Attack currentAttack;
     private GameObject[] selectActionButtons;   // UI buttons to choose Punch, Kick, Tackle
     private GameObject[] selectElementButtons;  // UI buttons to select element for an attack.
-    private GameObject[] doActionButtons;       // UI buttons to hit an enemy with an attack.
     
     
     // Eventually, we may want to support multiple enemies and spawn them programmatically.
@@ -44,29 +42,13 @@ public class BattleManager : MonoBehaviour
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
     private List<ActorManager> actorQueue_;
-
-    void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;  // Set up a callback for when the scene is loaded.
-    }
-
-     
-    /*
-     * Gets called BEFORE any of the script Start() methods.
-     */
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Initialize the PlayerStats if they haven't been initialized already.
-        // For now, the only important thing this does is set player health to
-        // 100 at the start of the game. Internally, the GameStateManager will
-        // make sure that this happens at most once!
-        // GameStateManager.PlayerStats.Initialize();
-    }
+    private int player_move_counter_ = 0;
 
     // Start is called before the first frame update (and after OnSceneLoaded).
     void Start()
     {
         actorQueue_ = new List<ActorManager>();
+
         GameObject[] player_units = GameObject.FindGameObjectsWithTag("PlayerUnit");
         GameObject[] enemy_units = GameObject.FindGameObjectsWithTag("EnemyUnit");
 
@@ -92,10 +74,10 @@ public class BattleManager : MonoBehaviour
 
         // Retrieve all of the UI buttons so that we can enable/disable them at the right time.
         selectActionButtons = GameObject.FindGameObjectsWithTag("SelectActionButton");
-        doActionButtons = GameObject.FindGameObjectsWithTag("DoActionButton");
+        // doActionButtons = GameObject.FindGameObjectsWithTag("DoActionButton");
         selectElementButtons = GameObject.FindGameObjectsWithTag("SelectElementButton");
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
-        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
+        // foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
 
         // IMPORTANT: If we ever switch to multiple players or enemies this will need to be handled differently!!!
@@ -224,7 +206,12 @@ public class BattleManager : MonoBehaviour
     {
         // First, enable the select element buttons and the do action buttons.
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
-        foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+        
+        if (player_move_counter_ > 0) {
+            foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = true; }
+        }
+
+        ++this.player_move_counter_;
     }
 
     /*
@@ -258,17 +245,15 @@ public class BattleManager : MonoBehaviour
 
     public void UISelectPlayerAttack(Attack selected)
     {
-        currentAttack = selected;
-
         // Disable all of the attack buttons (until enemy does its attack).
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = false; }
-        foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
+        // foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
 
         // Clicking any attack button triggers the attack. We then add the attack (and its result)
         // to the UIMoveLogMenu.
-        bool successful = playerManager.DoAttack(enemyManager, currentAttack);
-        PlayerActionResult result = new PlayerActionResult(playerManager.Element, currentAttack, successful);
+        bool successful = playerManager.DoAttack(enemyManager, selected);
+        PlayerActionResult result = new PlayerActionResult(playerManager.Element, selected, successful);
         UIMoveLogMenu.GetComponent<MoveLogManager>().AppendPlayerLogEntry(result);
 
         this.NextTurn();
