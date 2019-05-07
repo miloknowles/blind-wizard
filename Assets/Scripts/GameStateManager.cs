@@ -55,11 +55,11 @@ public class GameStateManager : MonoBehaviour
         public static double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
         public static int GENERIC_ENEMY_ATTACK_DAMAGE = 15;
         public static double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
-        public static int PUNCH_DAMAGE = 20;
-        public static double PUNCH_ACCURACY = 70.0;
-        public static int KICK_DAMAGE = 40;
+        public static int PUNCH_DAMAGE = 15;
+        public static double PUNCH_ACCURACY = 0.70;
+        public static int KICK_DAMAGE = 30;
         public static double KICK_ACCURACY = 0.5;
-        public static int TACKLE_DAMAGE = 60;
+        public static int TACKLE_DAMAGE = 45;
         public static double TACKLE_ACCURACY = 0.3;
 
         /*
@@ -81,11 +81,11 @@ public class GameStateManager : MonoBehaviour
             SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
             GENERIC_ENEMY_ATTACK_DAMAGE = 15;
             GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
-            PUNCH_DAMAGE = 20;
-            PUNCH_ACCURACY = 70.0;
-            KICK_DAMAGE = 40;
+            PUNCH_DAMAGE = 15;
+            PUNCH_ACCURACY = 0.7;
+            KICK_DAMAGE = 30;
             KICK_ACCURACY = 0.5;
-            TACKLE_DAMAGE = 60;
+            TACKLE_DAMAGE = 45;
             TACKLE_ACCURACY = 0.3;
         }
     };
