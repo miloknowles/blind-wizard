@@ -193,7 +193,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 160864257}
+      - m_Target: {fileID: 0}
         m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 160864251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c74414950b44197b04d191ef41ce26, type: 3}
+  m_Script: {fileID: 11500000, guid: 476f8cf91fca0a94a8e30e75d7ea2bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &177422266
@@ -906,7 +906,7 @@ MonoBehaviour:
     spaceCount: 86
     wordCount: 87
     linkCount: 0
-    lineCount: 8
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

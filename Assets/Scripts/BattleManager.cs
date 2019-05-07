@@ -60,7 +60,7 @@ public class BattleManager : MonoBehaviour
         // For now, the only important thing this does is set player health to
         // 100 at the start of the game. Internally, the GameStateManager will
         // make sure that this happens at most once!
-        GameStateManager.PlayerStats.Initialize();
+        // GameStateManager.PlayerStats.Initialize();
     }
 
     // Start is called before the first frame update (and after OnSceneLoaded).

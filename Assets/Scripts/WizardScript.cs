@@ -75,20 +75,17 @@ public class WizardScript : MonoBehaviour
 
     void EnterBattle()
     {
+        // If the game hasn't already been initialized, this will do it.
+        // This is here for convenience, so that we don't have to start in the main menu scene
+        // for every playtest to have things set up properly.
+        GameStateManager.InitializeNewGame();
+
         // Save the location of the wizard in the map.
         GameStateManager.MapState.WizardPosition = this.gameObject.transform.position;
 
         // Right before going to the battle, we need to set up the upcoming enemy.
         GameStateManager.UpcomingEnemyStats.Generate();
-
-        // If elements-for-region samples haven't been generated, do that before battle scene.
-        if (!GameStateManager.PlayerStats.samplesInitialized) {
-            foreach (Primitives.Region reg in System.Enum.GetValues(typeof(Primitives.Region))) {
-                Debug.Log(reg);
-                GameStateManager.PlayerStats.AddSamplesForRegion(reg, 15);
-            }
-        }
-
+        
         SceneManager.LoadScene("BattleScene");
     }
 }

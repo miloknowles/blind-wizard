@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Attached to the gameover / win scenes, handles going back to the main menu when a game is finished.
+ */
 public class GoToMainMenu : MonoBehaviour
 {
     void Start()
