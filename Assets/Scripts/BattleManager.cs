@@ -74,10 +74,8 @@ public class BattleManager : MonoBehaviour
 
         // Retrieve all of the UI buttons so that we can enable/disable them at the right time.
         selectActionButtons = GameObject.FindGameObjectsWithTag("SelectActionButton");
-        // doActionButtons = GameObject.FindGameObjectsWithTag("DoActionButton");
         selectElementButtons = GameObject.FindGameObjectsWithTag("SelectElementButton");
         foreach(var b in selectActionButtons) { b.GetComponent<Button>().interactable = false; }
-        // foreach(var b in doActionButtons) { b.GetComponent<Button>().interactable = false; }
         foreach(var b in selectElementButtons) { b.GetComponent<Button>().interactable = true; }
 
         // IMPORTANT: If we ever switch to multiple players or enemies this will need to be handled differently!!!
