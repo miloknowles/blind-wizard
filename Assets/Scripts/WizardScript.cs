@@ -14,10 +14,16 @@ public class WizardScript : MonoBehaviour
 
     void Start()
     {
+        // If the game hasn't already been initialized, this will do it.
+        // This is here for convenience, so that we don't have to start in the main menu scene
+        // for every playtest to have things set up properly.
+        GameStateManager.InitializeNewGame();
+
         // If the position of the wizard was saved, load it in here.
         if (GameStateManager.MapState.BattlesCompleted >= 1) {
             this.gameObject.transform.position = GameStateManager.MapState.WizardPosition;
         }
+        
         UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(GameStateManager.PlayerStats.Health);
     }
 
@@ -75,11 +81,6 @@ public class WizardScript : MonoBehaviour
 
     void EnterBattle()
     {
-        // If the game hasn't already been initialized, this will do it.
-        // This is here for convenience, so that we don't have to start in the main menu scene
-        // for every playtest to have things set up properly.
-        GameStateManager.InitializeNewGame();
-
         // Save the location of the wizard in the map.
         GameStateManager.MapState.WizardPosition = this.gameObject.transform.position;
 
