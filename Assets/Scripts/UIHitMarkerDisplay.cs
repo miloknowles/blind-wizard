@@ -2,44 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Primitives;
 
 public class UIHitMarkerDisplay : MonoBehaviour
 {
-    private GameObject UIHitText;
+    public GameObject UIPlayerHitEnemy;
+    public GameObject UIPlayerHitEnemyText;
+    public GameObject UIPlayerMissedEnemy;
+
     private System.Random rng = new System.Random();
 
     void Start()
     {
-        this.gameObject.SetActive(false); // Hide at start of the game.
-        UIHitText = transform.Find("UIHitText").gameObject;
+        // UIPlayerHitEnemy = this.transform.Find("UIPlayerHitEnemy").gameObject;
+        // UIPlayerHitEnemyText = UIPlayerHitEnemy.transform.Find("UIPlayerHitEnemyText").gameObject;
+        // UIPlayerMissedEnemy = this.transform.Find("UIPlayerMissedEnemy").gameObject;
+
+        UIPlayerHitEnemy.SetActive(false);
+        UIPlayerHitEnemyText.SetActive(true);
+        UIPlayerMissedEnemy.SetActive(false);
     }
 
-    private void ChooseRandomTilt()
+    private Quaternion ChooseRandomTilt()
     {
         double random_value = rng.NextDouble();
         float direction = (rng.NextDouble() >= 0.5) ? 1.0f : -1.0f;
         float z_tilt = 30.0f * direction * (float)random_value; // Choose a random tilt angle.
-        this.transform.rotation = Quaternion.Euler(0, 0, z_tilt);
+        return Quaternion.Euler(0, 0, z_tilt);
     }    
 
-    public void ShowHit() { ShowHitSuccess(true); }
-
-    public void ShowMiss() { ShowHitSuccess(false); }
-
-    private void ShowHitSuccess(bool did_hit)
+    public void ShowHit(Attack attack)
     {
-        ChooseRandomTilt();
-        UIHitText.GetComponent<TextMeshProUGUI>().text = did_hit ? "Attack hit!" : "Attack missed!";
-        UIHitText.GetComponent<TextMeshProUGUI>().color = did_hit ? new Color32(0, 255, 0, 255) : new Color32(255, 0, 0, 255);
-        this.gameObject.SetActive(true);
+        UIPlayerHitEnemy.gameObject.transform.rotation = ChooseRandomTilt();
+        UIPlayerHitEnemyText.GetComponent<TextMeshProUGUI>().text = attack.GetType().Name + " hit!";
 
-        IEnumerator coroutine = WaitAndDisappear();
+        // Appear, then disappear in a few seconds.
+        UIPlayerHitEnemy.SetActive(true);
+        IEnumerator coroutine = WaitAndDisappear(UIPlayerHitEnemy);
         StartCoroutine(coroutine);
     }
 
-    private IEnumerator WaitAndDisappear()
+    public void ShowMiss(Attack attack)
     {
-        yield return new WaitForSeconds(1.0f);
-        this.gameObject.SetActive(false);
+        UIPlayerMissedEnemy.gameObject.transform.rotation = ChooseRandomTilt();
+        UIPlayerMissedEnemy.GetComponent<TextMeshProUGUI>().text = attack.GetType().Name + " missed!";
+
+        // Appear, then disappear in a few seconds.
+        UIPlayerMissedEnemy.SetActive(true);
+        IEnumerator coroutine = WaitAndDisappear(UIPlayerMissedEnemy);
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator WaitAndDisappear(GameObject object_to_disappear)
+    {
+        yield return new WaitForSeconds(1.5f);
+        object_to_disappear.SetActive(false);
     }
 }

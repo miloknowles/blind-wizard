@@ -28,7 +28,6 @@ public class BattleManager : MonoBehaviour
 
     public GameObject playerObject;
     public GameObject enemyObject;
-    public GameObject UIEnemyHitMarkerDisplay;
     private ActorManager enemyManager;
     private ActorManager playerManager;
 
@@ -39,6 +38,7 @@ public class BattleManager : MonoBehaviour
     public GameObject UIRegionSamplesTitle;
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
+    public GameObject UIBlinkingDarkOccluder;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
@@ -222,6 +222,11 @@ public class BattleManager : MonoBehaviour
 
         bool successful = enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
 
+        if (successful) {
+            IEnumerator coroutine = DoBlinkingEffect(0.2f, 0.05f);
+            StartCoroutine(coroutine);
+        }
+
         // It's critical that the playerManager.Element doesn't change between when the enemy
         // does its attack and when this action result is added to the move log.
         EnemyActionResult enemy_result = new EnemyActionResult(successful, playerManager.Element);
@@ -254,14 +259,25 @@ public class BattleManager : MonoBehaviour
         bool successful = playerManager.DoAttack(enemyManager, selected);
 
         if (successful) {
-            UIEnemyHitMarkerDisplay.GetComponent<UIHitMarkerDisplay>().ShowHit();
+            enemyManager.GetComponent<UIHitMarkerDisplay>().ShowHit(selected);
         } else {
-            UIEnemyHitMarkerDisplay.GetComponent<UIHitMarkerDisplay>().ShowMiss();
+            enemyManager.GetComponent<UIHitMarkerDisplay>().ShowMiss(selected);
         }
 
         PlayerActionResult result = new PlayerActionResult(playerManager.Element, selected, successful);
         UIMoveLogMenu.GetComponent<MoveLogManager>().AppendPlayerLogEntry(result);
 
         this.NextTurn();
+    }
+
+    private IEnumerator DoBlinkingEffect(float duration, float blinkTime)
+    {
+        while (duration > 0.0f) {
+            duration -= Time.deltaTime;
+            UIBlinkingDarkOccluder.SetActive(!UIBlinkingDarkOccluder.activeSelf);
+            yield return new WaitForSeconds(blinkTime);
+        }
+        
+        UIBlinkingDarkOccluder.SetActive(false); // Make sure this is inactive at the end!
     }
 }
