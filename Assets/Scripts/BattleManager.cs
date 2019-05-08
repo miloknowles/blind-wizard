@@ -39,6 +39,8 @@ public class BattleManager : MonoBehaviour
     public GameObject UIRegionSamplesText;
     public GameObject UIMoveLogMenu;
     public GameObject UIBlinkingDarkOccluder;
+    public GameObject UIEnemyHitPlayer;
+    public GameObject UIEnemyMissedPlayer;
 
     // Units get placed in this queue with some priority to act. Every turn, we pop the highest
     // priority actor from the list and do it's action.
@@ -117,6 +119,9 @@ public class BattleManager : MonoBehaviour
             num_fire_enemies.ToString() + " fire type creatures\n" +
             num_air_enemies.ToString() + " air type creatures\n" +
             num_earth_enemies.ToString() + " earth type creatures\n";
+
+        UIEnemyHitPlayer.SetActive(false);
+        UIEnemyMissedPlayer.SetActive(false);
 
         // Go the the first turn of the battle.
         this.NextTurn();
@@ -222,6 +227,8 @@ public class BattleManager : MonoBehaviour
 
         bool successful = enemyManager.DoAttack(playerManager, new GenericEnemyAttack());
 
+        StartCoroutine(ShowEnemyHitOrMissText(successful));
+
         if (successful) {
             IEnumerator coroutine = DoBlinkingEffect(0.2f, 0.05f);
             StartCoroutine(coroutine);
@@ -270,6 +277,9 @@ public class BattleManager : MonoBehaviour
         this.NextTurn();
     }
 
+    /*
+     * Makes the screen blink rapidly be quickly hiding/showing a panel.
+     */
     private IEnumerator DoBlinkingEffect(float duration, float blinkTime)
     {
         while (duration > 0.0f) {
@@ -279,5 +289,23 @@ public class BattleManager : MonoBehaviour
         }
         
         UIBlinkingDarkOccluder.SetActive(false); // Make sure this is inactive at the end!
+    }
+
+    private IEnumerator ShowEnemyHitOrMissText(bool successful)
+    {
+        if (successful) {
+            // Since enemy attack damage changes throughout game, need to update text here.
+            UIEnemyHitPlayer.GetComponent<TextMeshProUGUI>().text = "Enemy attack hit! " + "-" +
+                    GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_DAMAGE.ToString() + " HP";
+            UIEnemyHitPlayer.SetActive(true);
+        } else {
+            UIEnemyMissedPlayer.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        // Hide the hit and miss text displays.
+        UIEnemyHitPlayer.SetActive(false);
+        UIEnemyMissedPlayer.SetActive(false);
     }
 }
