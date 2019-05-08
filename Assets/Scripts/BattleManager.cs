@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour
 
     public GameObject playerObject;
     public GameObject enemyObject;
+    public GameObject UIEnemyHitMarkerDisplay;
     private ActorManager enemyManager;
     private ActorManager playerManager;
 
@@ -251,6 +252,13 @@ public class BattleManager : MonoBehaviour
         // Clicking any attack button triggers the attack. We then add the attack (and its result)
         // to the UIMoveLogMenu.
         bool successful = playerManager.DoAttack(enemyManager, selected);
+
+        if (successful) {
+            UIEnemyHitMarkerDisplay.GetComponent<UIHitMarkerDisplay>().ShowHit();
+        } else {
+            UIEnemyHitMarkerDisplay.GetComponent<UIHitMarkerDisplay>().ShowMiss();
+        }
+
         PlayerActionResult result = new PlayerActionResult(playerManager.Element, selected, successful);
         UIMoveLogMenu.GetComponent<MoveLogManager>().AppendPlayerLogEntry(result);
 
