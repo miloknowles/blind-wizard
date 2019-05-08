@@ -689,22 +689,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100996148}
   m_CullTransparentMesh: 0
---- !u!114 &1100996152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100996148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 349923a8430baf745b105778ace1da7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healButton: {fileID: 2136596798}
-  sampleButton: {fileID: 0}
-  damageButton: {fileID: 0}
-  UIDescribeUpdatesText: {fileID: 0}
 --- !u!1 &1396162175
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,8 +723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: 742.6, y: 135.6}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 654.7, y: 125.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396162177
 MonoBehaviour:
@@ -762,8 +746,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'You ran out of HP! Try paying more attention to the provided information
-    next time, to more effectively defeat your enemies. '
+  m_text: 'Oh no! You were defeated by a %type% type enemy! Try paying more attention
+    to the provided information next time, to more effectively defeat your enemies. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7fab2d762e921423da201ba922f66202, type: 2}
   m_sharedMaterial: {fileID: 21125757256039500, guid: 7fab2d762e921423da201ba922f66202,
@@ -792,8 +776,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 66
+  m_fontSizeBase: 66
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -833,10 +817,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1396162177}
-    characterCount: 125
+    characterCount: 155
     spriteCount: 0
-    spaceCount: 21
-    wordCount: 21
+    spaceCount: 26
+    wordCount: 26
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -1163,3 +1147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1845634e4e90d4ec6944a072d8208927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoText: {fileID: 1396162177}
