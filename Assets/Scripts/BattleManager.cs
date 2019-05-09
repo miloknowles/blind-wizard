@@ -32,13 +32,22 @@ public class BattleManager : MonoBehaviour
     private ActorManager playerManager;
 
     //================ REGION BACKGROUND IMAGES =======================
-    private Dictionary<Region, string> BackgroundSpriteFilenames = new Dictionary<Region, string>(){
+    private Dictionary<Region, string> BackgroundSpriteFilenames = new Dictionary<Region, string>()
+    {
         {Region.City, "Backgrounds/city_background"},
         {Region.Forest, "Backgrounds/plains_background"},       // TODO
         {Region.Mountain, "Backgrounds/mountain_background"},
         {Region.Storm, "Backgrounds/city_background"},          // TODO
         {Region.Plains, "Backgrounds/plains_background"},       // TODO
         {Region.Village, "Backgrounds/city_background"}         // TODO
+    };
+
+    //================ ENEMY SPRITE IMAGES ============================
+    private Dictionary<Primitives.Attribute, string> EnemySpriteFilenames = new Dictionary<Primitives.Attribute, string>()
+    {
+        {Attribute.Furry, "Enemies/ChiliDog"},
+        {Attribute.Smooth, "Enemies/Robot"},
+        {Attribute.Scaly, "Enemies/Turtle"}
     };
 
     //================ UNITY EDITOR UI ELEMENTS =======================
@@ -107,6 +116,8 @@ public class BattleManager : MonoBehaviour
         enemyManager.Element = GameStateManager.UpcomingEnemyStats.Element;
         enemyManager.Health = GameStateManager.UpcomingEnemyStats.Health;
         enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
+        enemyObject.GetComponent<Image>().sprite =
+                Resources.Load<Sprite>(EnemySpriteFilenames[enemyManager.Attribute]);
 
         // Update the region and attribute displays.
         UIEnemyAttributeText.GetComponent<TextMeshProUGUI>().text = enemyManager.Attribute.ToString() + " enemy";
