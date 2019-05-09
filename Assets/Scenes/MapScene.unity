@@ -8497,6 +8497,21 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2589735921243745495, guid: 23f92a1eb8e29694aaf81d74797a8ad2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589735921243745495, guid: 23f92a1eb8e29694aaf81d74797a8ad2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589735921243745495, guid: 23f92a1eb8e29694aaf81d74797a8ad2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23f92a1eb8e29694aaf81d74797a8ad2, type: 3}
 --- !u!1001 &1771859320
@@ -9026,7 +9041,7 @@ PrefabInstance:
     - target: {fileID: 2589735921243745492, guid: 23f92a1eb8e29694aaf81d74797a8ad2,
         type: 3}
       propertyPath: m_Name
-      value: BattleTriggerNode
+      value: BattleTriggerNode (0)
       objectReference: {fileID: 0}
     - target: {fileID: 2589735921243745494, guid: 23f92a1eb8e29694aaf81d74797a8ad2,
         type: 3}

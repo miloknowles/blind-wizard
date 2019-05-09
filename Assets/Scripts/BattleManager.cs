@@ -31,6 +31,16 @@ public class BattleManager : MonoBehaviour
     private ActorManager enemyManager;
     private ActorManager playerManager;
 
+    //================ REGION BACKGROUND IMAGES =======================
+    private Dictionary<Region, string> BackgroundSpriteFilenames = new Dictionary<Region, string>(){
+        {Region.City, "Backgrounds/city_background"},
+        {Region.Forest, "Backgrounds/plains_background"},       // TODO
+        {Region.Mountain, "Backgrounds/mountain_background"},
+        {Region.Storm, "Backgrounds/city_background"},          // TODO
+        {Region.Plains, "Backgrounds/plains_background"},       // TODO
+        {Region.Village, "Backgrounds/city_background"}         // TODO
+    };
+
     //================ UNITY EDITOR UI ELEMENTS =======================
     public GameObject UIRegionText;
     public GameObject UIEnemyAttributeText;
@@ -50,6 +60,11 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update (and after OnSceneLoaded).
     void Start()
     {
+        // Load in the scene background based on the region.
+        Region currentRegion = GameStateManager.MapState.CurrentRegion;
+        Sprite background = Resources.Load<Sprite>(BackgroundSpriteFilenames[currentRegion]);
+        this.GetComponent<Image>().sprite = background;
+
         actorQueue_ = new List<ActorManager>();
 
         GameObject[] player_units = GameObject.FindGameObjectsWithTag("PlayerUnit");
@@ -94,7 +109,6 @@ public class BattleManager : MonoBehaviour
         enemyManager.Attribute = GameStateManager.UpcomingEnemyStats.Attribute;
 
         // Update the region and attribute displays.
-        Region currentRegion = GameStateManager.MapState.CurrentRegion;
         UIEnemyAttributeText.GetComponent<TextMeshProUGUI>().text = enemyManager.Attribute.ToString() + " enemy";
         UIRegionText.GetComponent<TextMeshProUGUI>().text = currentRegion.ToString();
         UIEnemyMaxHealthText.GetComponent<TextMeshProUGUI>().text = enemyManager.Health + "hp";

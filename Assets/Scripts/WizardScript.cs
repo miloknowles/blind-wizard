@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Primitives;
 
 public class WizardScript : MonoBehaviour
 {
@@ -65,27 +66,31 @@ public class WizardScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log(collider.gameObject.name);
-
         if (collider.gameObject.tag == "BattleTriggerNode") {
+
             // Ignore any battle triggers that we've already done.
-            if (GameStateManager.MapState.CompletedBattleTriggerNodeNames.Contains(collider.gameObject.name)) {
+            string name = collider.gameObject.name;
+            if (GameStateManager.MapState.BattleNodes[name].completed) {
                 Debug.Log("Battle trigger already done, skipping.");
                 return;
             }
             
             // Otherwise go to battle!
-            GameStateManager.MapState.CompletedBattleTriggerNodeNames.Add(collider.gameObject.name);
-            EnterBattle();
+            GameStateManager.MapState.BattleNodes[name].completed = true;
+            EnterBattle(GameStateManager.MapState.BattleNodes[name].region);
         }
     }
 
-    void EnterBattle()
+    void EnterBattle(Region upcoming_region)
     {
+        // IMPORTANT: Update the CurrentRegion in the GameStateManager.
+        GameStateManager.MapState.CurrentRegion = upcoming_region;
+
         // Save the location of the wizard in the map.
         GameStateManager.MapState.WizardPosition = this.gameObject.transform.position;
 
         // Right before going to the battle, we need to set up the upcoming enemy.
-        GameStateManager.UpcomingEnemyStats.Generate();
+        GameStateManager.UpcomingEnemyStats.Generate(upcoming_region);
         
         SceneManager.LoadScene("BattleScene");
     }

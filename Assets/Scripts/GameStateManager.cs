@@ -35,13 +35,22 @@ public class GameStateManager : MonoBehaviour
         // and restored after leaving the battle.
         public static Vector3 WizardPosition = new Vector3(0, 0, 0);
         public static int BattlesCompleted = 0;
-        public static List<string> CompletedBattleTriggerNodeNames = new List<string>();
+
+        // Each BattleTriggerNode has some corresponding data that we store about whether it
+        // has been completed and what its Region is. This is persisted here so that its consistent
+        // every time the Map Scene is reloaded.
+        public static Dictionary<string, BattleNodeInfo> BattleNodes = new Dictionary<string, BattleNodeInfo>();
 
         public static void Reset()
         {
             WizardPosition = new Vector3(0, 0, 0);
             BattlesCompleted = 0;
-            CompletedBattleTriggerNodeNames = new List<string>();
+
+            // WARNING: Resetting the battle nodes below could erase all of the work that UpdateZoneSprites does
+            // so I don't think it's a good idea. Currently, the BattleNodes will stay the same for multiple
+            // playthroughs, until the game is restarted. This is fine, especially if the player wants to
+            // play through again with a different path in mind.
+            // BattleNodes = new Dictionary<string, BattleNodeInfo>();
         }
     };
 
@@ -144,20 +153,23 @@ public class GameStateManager : MonoBehaviour
         public static Attribute Attribute { get; private set; }
         public static Element Element { get; private set; }
 
-        // TODO: take in a region here eventually, just making something to test...
-        public static void Generate()
+        /*
+         * Generates an upcoming enemy based on the distribution over elements
+         * in a region. Also generates an attribute for the enemy based on the
+         * distribution of attributes given an element.
+         */
+        public static void Generate(Region upcoming_region)
         {
-            Region random_region = ProbabilitySystem.SampleRegionUniform();
-            MapState.CurrentRegion = random_region;
+            MapState.CurrentRegion = upcoming_region; // Just to be safe.
 
             // The enemy health increases with each battle to raise difficulty.
             Health = DetermineEnemyMaxHealth();
 
-            Element = ProbabilitySystem.SampleElementGivenRegion(random_region);
+            Element = ProbabilitySystem.SampleElementGivenRegion(upcoming_region);
             Attribute = ProbabilitySystem.SampleAttributeGivenElement(Element);
 
             Debug.Log("============= GENERATED UPCOMING BATTLE =============");
-            Debug.Log("Region: " + random_region);
+            Debug.Log("Region: " + upcoming_region);
             Debug.Log("Enemy Element: " + Element);
             Debug.Log("Enemy Attribute: " + Attribute);
             Debug.Log("Enemy Health: " + Health);

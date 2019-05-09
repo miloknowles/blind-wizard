@@ -5,23 +5,19 @@ using Primitives;
 
 public class UpdateZoneSprites : MonoBehaviour
 {
-    private GameObject[] zones;
-     void Start()     {
-        zones = GameObject.FindGameObjectsWithTag("BattleTriggerNode");         foreach (GameObject zone in zones)
-        {
-            Region random_region = ProbabilitySystem.SampleRegionUniform();             string spr = "";
-             if (random_region == Region.City)             {
-                spr = "city";             }
-            else if (random_region == Region.Forest)             {
-                spr = "forest";
+    void Start()
+    {
+        GameObject[] battle_trigger_nodes = GameObject.FindGameObjectsWithTag("BattleTriggerNode");
+        
+        foreach (GameObject btn in battle_trigger_nodes) {
+            // If this node hasn't already been assigned a Region, do that first.
+            if (!GameStateManager.MapState.BattleNodes.ContainsKey(btn.name)) {
+                Region random_region = ProbabilitySystem.SampleRegionUniform();
+                GameStateManager.MapState.BattleNodes[btn.name] = new BattleNodeInfo(random_region);
             }
-            else if (random_region == Region.Mountain)             {                 spr = "mountain";             }
-            else if (random_region == Region.Storm)             {
-                spr = "storm";             }
-            else if (random_region == Region.Plains)             {
-                spr = "plains";             }
-            else if (random_region == Region.Village)             {
-                spr = "village";             }             zone.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(spr);
+            // Now make sure this node's sprite is set to the correct file.
+            btn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(
+                    GameStateManager.MapState.BattleNodes[btn.name].sprite);
         }
     }
-} 
+}

@@ -6,23 +6,6 @@ using System.Collections.Generic;
 // or C# things with the same name.
 namespace Primitives {
 
-// /*
-//  * Store all of the importants constants here so we only have to change them
-//  * in one place. This should also make it easier to adjust game difficulty.
-//  */
-// static class Constants
-// {
-//     public const double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
-//     public const int GENERIC_ENEMY_ATTACK_DAMAGE = 30;
-//     public const double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
-//     public const int PUNCH_DAMAGE = 20;
-//     public const double PUNCH_ACCURACY = 70.0;
-//     public const int KICK_DAMAGE = 40;
-//     public const double KICK_ACCURACY = 0.5;
-//     public const int TACKLE_DAMAGE = 60;
-//     public const double TACKLE_ACCURACY = 0.3;
-// };
-
 /*
  * Defines all of the regions accessible in the game.
  */
@@ -175,5 +158,27 @@ public static class ElementOrdering {
     }
 };
 
+public class BattleNodeInfo
+{
+    // Maps a Region to the corresponding sprite in Resources/ folder.
+    public static Dictionary<Region, string> SpriteFilenames = new Dictionary<Region, string>(){
+        {Region.City, "city"},
+        {Region.Forest, "forest"},
+        {Region.Mountain, "mountain"},
+        {Region.Storm, "storm"},
+        {Region.Plains, "plains"},
+        {Region.Village, "village"}
+    };
+
+    public BattleNodeInfo(Region region)
+    {
+        this.region = region;
+        this.sprite = SpriteFilenames[this.region];
+    }
+
+    public bool completed = false;
+    public string sprite;
+    public Region region;
+};
 
 } // namespace Primitives
