@@ -27,12 +27,12 @@ namespace Primitives {
  * Defines all of the regions accessible in the game.
  */
 public enum Region {
-    Ocean,
-    Volcano,
-    Underground,
-    Cloud,
+    City,
+    Forest,
+    Mountain,
+    Storm,
     Plains,
-    MMTTG
+    Village
 };
 
 /*

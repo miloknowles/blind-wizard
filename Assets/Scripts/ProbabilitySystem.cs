@@ -27,17 +27,17 @@ public static class ProbabilitySystem {
     //========================== DISTRIBUTION DEFINITIONS ==============================
     // For each region, stores the probability of an enemy being each element.
     private static Dictionary<Region, ElementDistribution> P_ELEMENT_GIVEN_REGION = new Dictionary<Region, ElementDistribution>() {
-        {Region.Ocean, new ElementDistribution() {
+        {Region.City, new ElementDistribution() {
             {Element.Fire, 0.1}, {Element.Air, 0.2}, {Element.Earth, 0.3}, {Element.Water, 0.4} } },
-        {Region.Volcano, new ElementDistribution() {
+        {Region.Forest, new ElementDistribution() {
             {Element.Fire, 0.4}, {Element.Air, 0.2}, {Element.Earth, 0.3}, {Element.Water, 0.1} } },
-        {Region.Underground, new ElementDistribution() {
+        {Region.Mountain, new ElementDistribution() {
             {Element.Fire, 0.3}, {Element.Air, 0.1}, {Element.Earth, 0.4}, {Element.Water, 0.2} } },
-        {Region.Cloud, new ElementDistribution() {
+        {Region.Storm, new ElementDistribution() {
             {Element.Fire, 0.2}, {Element.Air, 0.4}, {Element.Earth, 0.1}, {Element.Water, 0.3} } },
         {Region.Plains, new ElementDistribution() {
             {Element.Fire, 0.25}, {Element.Air, 0.25}, {Element.Earth, 0.25}, {Element.Water, 0.25} } },
-        {Region.MMTTG, new ElementDistribution() {
+        {Region.Village, new ElementDistribution() {
             {Element.Fire, 0.8}, {Element.Air, 0.1}, {Element.Earth, 0.1}, {Element.Water, 0.0} } }
     };
 
@@ -76,7 +76,7 @@ public static class ProbabilitySystem {
             List<double> noise;
 			var random = new System.Random();
 
-			if (region != Primitives.Region.MMTTG) {
+			if (region != Primitives.Region.Village) {
                 noise = new List<double> { 0.1, 0.1, -0.1, -0.1 };
                 foreach (Element elt in P_ELEMENT_GIVEN_REGION[region].Keys) {
 					int index = random.Next(noise.Count);
