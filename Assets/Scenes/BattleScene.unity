@@ -2114,6 +2114,7 @@ GameObject:
   - component: {fileID: 541419182}
   - component: {fileID: 541419184}
   - component: {fileID: 541419183}
+  - component: {fileID: 541419185}
   m_Layer: 5
   m_Name: ProbabilityHelperPanel
   m_TagString: Untagged
@@ -2138,7 +2139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -20.000122, y: 70}
+  m_AnchoredPosition: {x: -20, y: 70}
   m_SizeDelta: {x: 320, y: 490}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &541419183
@@ -2178,6 +2179,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541419181}
   m_CullTransparentMesh: 0
+--- !u!114 &541419185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541419181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525d34796bf31eb428fda926095195a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &542611397 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3378412734321592309, guid: 8893284ef76cb4bc594e641a3c295b9d,
@@ -4191,7 +4204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1103945343}
   m_HandleRect: {fileID: 1103945342}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4274,7 +4287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0001373291, y: -0.0000038146973}
+  m_AnchoredPosition: {x: -0.0001373291, y: -0.000019073486}
   m_SizeDelta: {x: 0.000030518, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1317635268
