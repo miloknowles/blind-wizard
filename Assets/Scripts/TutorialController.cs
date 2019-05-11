@@ -115,9 +115,8 @@ public class TutorialController : MonoBehaviour
 
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
-        UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
-        UIConfirmInfoButton.transform.position =
-            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height - button_height - 10.0f, 0.0f);
+        UIConfirmInfoButton.transform.SetParent(TutorialText_Enemy.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(0.0f, -button_height - 10.0f, 0.0f);
 
         enemyObject.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
@@ -131,9 +130,9 @@ public class TutorialController : MonoBehaviour
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
 
-        UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
-        UIConfirmInfoButton.transform.position =
-            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height, 0.0f);
+        UIConfirmInfoButton.transform.SetParent(TutorialText_AttackPanel.transform, false);
+        UIConfirmInfoButton.transform.localPosition =
+            new Vector3(0.0f, 10.0f, 0.0f);
 
         UIChooseAttackPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
@@ -149,8 +148,8 @@ public class TutorialController : MonoBehaviour
 
         float menu_height = UIMoveLogScrollView.GetComponent<RectTransform>().rect.height;
 
-        UIConfirmInfoButton.transform.SetParent(UIMoveLogScrollView.transform, false);
-        UIConfirmInfoButton.transform.localPosition = new Vector3(-button_width, -menu_height - button_height - 10.0f, 0.0f);
+        UIConfirmInfoButton.transform.SetParent(TutorialText_MoveLog.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(0.0f, -button_height - 10.0f, 0.0f);
 
         UIMoveLogScrollView.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
