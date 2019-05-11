@@ -9,8 +9,11 @@ public class TutorialController : MonoBehaviour
     public GameObject UIRegionSamplesPanel;
     public GameObject UIAttributeInfoPanel;
     public GameObject UIChooseAttackPanel;
+    public GameObject TutorialText_AttackPanel;
     public GameObject UIMoveLogScrollView;
+    public GameObject TutorialText_MoveLog;
     public GameObject enemyObject;
+    public GameObject TutorialText_Enemy;
     public GameObject UIPlayerStatsPanel;
     public GameObject UIConfirmInfoButton;
     public GameObject UIBlinkingDarkOccluder;
@@ -26,6 +29,15 @@ public class TutorialController : MonoBehaviour
         enemyObject.SetActive(false);
         UIPlayerStatsPanel.SetActive(false);
         UIConfirmInfoButton.SetActive(false);
+
+        HideAllTutorialText();
+    }
+
+    private void HideAllTutorialText()
+    {
+        TutorialText_Enemy.SetActive(false);
+        TutorialText_AttackPanel.SetActive(false);
+        TutorialText_MoveLog.SetActive(false);
     }
 
     /*
@@ -98,6 +110,9 @@ public class TutorialController : MonoBehaviour
     {
         StartCoroutine(FadeInEnemy(0.2f));
 
+        HideAllTutorialText();
+        TutorialText_Enemy.SetActive(true);
+
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
         UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
@@ -110,6 +125,9 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIChooseAttack()
     {
+        HideAllTutorialText();
+        TutorialText_AttackPanel.SetActive(true);
+
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
 
@@ -123,6 +141,9 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIMoveLog()
     {
+        HideAllTutorialText();
+        TutorialText_MoveLog.SetActive(true);
+
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
 
@@ -169,12 +190,7 @@ public class TutorialController : MonoBehaviour
             action();
         } else {
             UIConfirmInfoButton.SetActive(false);
+            HideAllTutorialText();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
