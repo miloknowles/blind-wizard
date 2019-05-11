@@ -35,6 +35,7 @@ public class GameStateManager : MonoBehaviour
         // and restored after leaving the battle.
         public static Vector3 WizardPosition = new Vector3(0, 0, 0);
         public static int BattlesCompleted = 0;
+        public static bool TutorialMode = true;
 
         // Each BattleTriggerNode has some corresponding data that we store about whether it
         // has been completed and what its Region is. This is persisted here so that its consistent

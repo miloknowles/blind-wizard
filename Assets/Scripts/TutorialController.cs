@@ -8,6 +8,7 @@ public class TutorialController : MonoBehaviour
 {
     public GameObject UIRegionSamplesPanel;
     public GameObject UIAttributeInfoPanel;
+    public GameObject TutorialText_Attribute;
     public GameObject UIChooseAttackPanel;
     public GameObject TutorialText_AttackPanel;
     public GameObject UIMoveLogScrollView;
@@ -40,6 +41,7 @@ public class TutorialController : MonoBehaviour
         TutorialText_AttackPanel.SetActive(false);
         TutorialText_MoveLog.SetActive(false);
         TutorialText_PlayerStats.SetActive(false);
+        TutorialText_Attribute.SetActive(false);
     }
 
     /*
@@ -109,6 +111,9 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIAttributeInfo()
     {
+        HideAllTutorialText();
+        TutorialText_Attribute.SetActive(true);
+
         // This panel is anchored to the bottom left.
         UIConfirmInfoButton.transform.SetParent(UIAttributeInfoPanel.transform, false);
         UIConfirmInfoButton.transform.localPosition = new Vector3(350.0f, 0.0f, 0.0f);
@@ -170,27 +175,49 @@ public class TutorialController : MonoBehaviour
     void Start()
     {
         Debug.Log("Running the tutorial controller!");
-        HideAll();
 
         // Make the transition smoother with a fade in.
         StartCoroutine(FadeInScene(1.0f));
 
         UIConfirmInfoButton.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
+        UIConfirmInfoButton.SetActive(false);
 
-        // Add all of the UI reveal actions that require a confirm button to a queue.
-        queue.Enqueue(() => this.ShowUIRegionSamples());
-        queue.Enqueue(() => this.ShowUIAttributeInfo());
-        queue.Enqueue(() => this.ShowEnemy());
-        queue.Enqueue(() => this.ShowUIChooseAttack());
-        queue.Enqueue(() => this.ShowUIPlayerStats());
-        queue.Enqueue(() => this.ShowUIMoveLog());
+        HideAllTutorialText();
 
-        // Don't need to wait for a click to show the player stats bar at the bottom.
-        // ShowUIPlayerStats();
+        if (GameStateManager.MapState.TutorialMode) {
+            // Battle #1: Only have region info and attack info.
+            if (GameStateManager.MapState.BattlesCompleted == 0) {
+                Debug.Log("Battle #3: Introduction region info.");
+                HideAll();
+                queue.Enqueue(() => this.ShowUIRegionSamples());
+                queue.Enqueue(() => this.ShowEnemy());
+                queue.Enqueue(() => this.ShowUIChooseAttack());
+                queue.Enqueue(() => this.ShowUIPlayerStats());
+                queue.Enqueue(() => this.ShowUIMoveLog());
 
-        // Pop off the first action (player doesn't have to click yet).
-        Action first_action = queue.Dequeue();
-        first_action();
+                // Pop off the first action (player doesn't have to click yet).
+                Action first_action = queue.Dequeue();
+                first_action();
+            
+            // Battle #2 : Also have attribute info.
+            } else if (GameStateManager.MapState.BattlesCompleted == 1) {
+                Debug.Log("Battle #2: Introducing attribute info.");
+                HideAll();
+                this.ShowUIRegionSamples();
+                this.ShowEnemy();
+                this.ShowUIChooseAttack();
+                this.ShowUIPlayerStats();
+                this.ShowUIMoveLog();
+
+                queue.Enqueue(() => this.ShowUIAttributeInfo());
+
+                // Pop off the first action (player doesn't have to click yet).
+                Action first_action = queue.Dequeue();
+                first_action();
+            } else {
+                Debug.Log("Battle #3: No more tutorial info to present.");
+            }
+        }
     }
 
     // Each confirm button click removes something from the queue.
