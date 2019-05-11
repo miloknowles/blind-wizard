@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ using UnityEngine.UI;
 public class UIStatsDisplay : MonoBehaviour
 {
     public GameObject UIActorHealthBarSprite;
+    public TMP_Text currentHealthText;
 
     // Note: need to set these in the Unity editor!
     // They were hardcoded before, which doesn't work now that the enemy and player have different
@@ -25,5 +27,6 @@ public class UIStatsDisplay : MonoBehaviour
         var rectTransform = UIActorHealthBarSprite.GetComponent<RectTransform>();
         float max_value = determineEnemyMaxHealth ? (float)GameStateManager.UpcomingEnemyStats.DetermineEnemyMaxHealth() : 100.0f;
         rectTransform.sizeDelta = new Vector2(this.healthBarInitialWidth * (float)value / max_value, this.healthBarInitialHeight);
+        currentHealthText.text = value + "hp";
     }
 }
