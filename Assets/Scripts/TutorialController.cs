@@ -39,13 +39,13 @@ public class TutorialController : MonoBehaviour
 
         UIBlinkingDarkOccluder.SetActive(true);
 
+        float wait_time = duration / 100.0f;
         while (duration > 0.0f) {
-            duration -= Time.deltaTime;
+            duration -= wait_time;
             color.a -= 0.01f;
             color.a = Mathf.Max(0, color.a);
-            Debug.Log(color);
             UIBlinkingDarkOccluder.GetComponent<Image>().color = color;
-            yield return new WaitForSeconds(duration / 100.0f);
+            yield return new WaitForSeconds(wait_time);
         }
 
         UIBlinkingDarkOccluder.SetActive(false);
@@ -60,30 +60,60 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIRegionSamples()
     {
+        // This panel is anchored to the top left.
+        UIConfirmInfoButton.transform.SetParent(UIRegionSamplesPanel.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(0.0f, -90.0f, 0.0f);
+
         UIRegionSamplesPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
 
     private void ShowUIAttributeInfo()
     {
+        // This panel is anchored to the bottom left.
+        UIConfirmInfoButton.transform.SetParent(UIAttributeInfoPanel.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(350.0f, 0.0f, 0.0f);
+
         UIAttributeInfoPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
 
     private void ShowEnemy()
     {
+        float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
+        float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
+        Debug.Log(button_width + " " + button_height);
+        UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
+        UIConfirmInfoButton.transform.position =
+            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height - button_height - 10.0f, 0.0f);
+
         enemyObject.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
 
     private void ShowUIChooseAttack()
     {
+        float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
+        float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
+
+        UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
+        UIConfirmInfoButton.transform.position =
+            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height - button_height - 10.0f, 0.0f);
+
         UIChooseAttackPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
 
     private void ShowUIMoveLog()
     {
+        float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
+        float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
+
+        float menu_height = UIMoveLogScrollView.GetComponent<RectTransform>().rect.height;
+
+        UIConfirmInfoButton.transform.SetParent(UIMoveLogScrollView.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(-button_width, -menu_height - button_height - 10.0f, 0.0f);
+
         UIMoveLogScrollView.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
@@ -94,19 +124,24 @@ public class TutorialController : MonoBehaviour
         Debug.Log("Running the tutorial controller!");
         HideAll();
 
+        // Make the transition smoother with a fade in.
+        StartCoroutine(FadeInScene(1.0f));
+
         UIConfirmInfoButton.GetComponent<Button>().onClick.AddListener(() => this.OnClick());
 
-        // Add all of the UI reveal actions to a queue.
-        queue.Enqueue(() => this.ShowUIPlayerStats());
+        // Add all of the UI reveal actions that require a confirm button to a queue.
         queue.Enqueue(() => this.ShowUIRegionSamples());
         queue.Enqueue(() => this.ShowUIAttributeInfo());
         queue.Enqueue(() => this.ShowEnemy());
         queue.Enqueue(() => this.ShowUIChooseAttack());
         queue.Enqueue(() => this.ShowUIMoveLog());
 
-        StartCoroutine(FadeInScene(2.0f));
+        // Don't need to wait for a click to show the player stats bar at the bottom.
+        ShowUIPlayerStats();
 
-        UIConfirmInfoButton.SetActive(true);
+        // Pop off the first action (player doesn't have to click yet).
+        Action first_action = queue.Dequeue();
+        first_action();
     }
 
     // Each confirm button click removes something from the queue.
