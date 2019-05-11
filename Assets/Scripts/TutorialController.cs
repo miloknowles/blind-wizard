@@ -13,6 +13,7 @@ public class TutorialController : MonoBehaviour
     public GameObject enemyObject;
     public GameObject UIPlayerStatsPanel;
     public GameObject UIConfirmInfoButton;
+    public GameObject UIBlinkingDarkOccluder;
 
     private Queue<Action> queue = new Queue<Action>();
 
@@ -25,6 +26,30 @@ public class TutorialController : MonoBehaviour
         enemyObject.SetActive(false);
         UIPlayerStatsPanel.SetActive(false);
         UIConfirmInfoButton.SetActive(false);
+    }
+
+    /*
+     * Fade in the scene by slowly reducing the alpha on an occluder.
+     */
+    private IEnumerator FadeInScene(float duration)
+    {
+        Color initial_color = UIBlinkingDarkOccluder.GetComponent<Image>().color;
+        Color color = UIBlinkingDarkOccluder.GetComponent<Image>().color;
+        color.a = 1.0f;
+
+        UIBlinkingDarkOccluder.SetActive(true);
+
+        while (duration > 0.0f) {
+            duration -= Time.deltaTime;
+            color.a -= 0.01f;
+            color.a = Mathf.Max(0, color.a);
+            Debug.Log(color);
+            UIBlinkingDarkOccluder.GetComponent<Image>().color = color;
+            yield return new WaitForSeconds(duration / 100.0f);
+        }
+
+        UIBlinkingDarkOccluder.SetActive(false);
+        UIBlinkingDarkOccluder.GetComponent<Image>().color = initial_color;
     }
 
     private void ShowUIPlayerStats()
@@ -78,6 +103,8 @@ public class TutorialController : MonoBehaviour
         queue.Enqueue(() => this.ShowEnemy());
         queue.Enqueue(() => this.ShowUIChooseAttack());
         queue.Enqueue(() => this.ShowUIMoveLog());
+
+        StartCoroutine(FadeInScene(2.0f));
 
         UIConfirmInfoButton.SetActive(true);
     }
