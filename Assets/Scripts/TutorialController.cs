@@ -52,6 +52,22 @@ public class TutorialController : MonoBehaviour
         UIBlinkingDarkOccluder.GetComponent<Image>().color = initial_color;
     }
 
+    private IEnumerator FadeInEnemy(float duration)
+    {
+        Color color = enemyObject.GetComponent<Image>().color;
+        color.a = 0.0f;
+
+        float wait_time = duration / 100.0f;
+
+        while (duration > 0.0f) {
+            duration -= wait_time;
+            color.a += 0.01f;
+            color.a = Mathf.Min(1.0f, color.a);
+            enemyObject.GetComponent<Image>().color = color;
+            yield return new WaitForSeconds(wait_time);
+        }
+    }
+
     private void ShowUIPlayerStats()
     {
         UIPlayerStatsPanel.SetActive(true);
@@ -80,9 +96,10 @@ public class TutorialController : MonoBehaviour
 
     private void ShowEnemy()
     {
+        StartCoroutine(FadeInEnemy(0.2f));
+
         float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
         float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
-        Debug.Log(button_width + " " + button_height);
         UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
         UIConfirmInfoButton.transform.position =
             new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height - button_height - 10.0f, 0.0f);
@@ -98,7 +115,7 @@ public class TutorialController : MonoBehaviour
 
         UIConfirmInfoButton.transform.SetParent(this.gameObject.transform, false);
         UIConfirmInfoButton.transform.position =
-            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height - button_height - 10.0f, 0.0f);
+            new Vector3(0.5f*Screen.width - 0.5f*button_width, 0.5f * Screen.height, 0.0f);
 
         UIChooseAttackPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
