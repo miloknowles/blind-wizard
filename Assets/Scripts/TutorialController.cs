@@ -15,6 +15,7 @@ public class TutorialController : MonoBehaviour
     public GameObject enemyObject;
     public GameObject TutorialText_Enemy;
     public GameObject UIPlayerStatsPanel;
+    public GameObject TutorialText_PlayerStats;
     public GameObject UIConfirmInfoButton;
     public GameObject UIBlinkingDarkOccluder;
 
@@ -38,6 +39,7 @@ public class TutorialController : MonoBehaviour
         TutorialText_Enemy.SetActive(false);
         TutorialText_AttackPanel.SetActive(false);
         TutorialText_MoveLog.SetActive(false);
+        TutorialText_PlayerStats.SetActive(false);
     }
 
     /*
@@ -82,6 +84,15 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIPlayerStats()
     {
+        HideAllTutorialText();
+        TutorialText_PlayerStats.SetActive(true);
+
+        float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
+        float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
+
+        UIConfirmInfoButton.transform.SetParent(TutorialText_PlayerStats.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(-0.5f*button_width, 10.0f, 0.0f);
+
         UIPlayerStatsPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
     }
@@ -171,10 +182,11 @@ public class TutorialController : MonoBehaviour
         queue.Enqueue(() => this.ShowUIAttributeInfo());
         queue.Enqueue(() => this.ShowEnemy());
         queue.Enqueue(() => this.ShowUIChooseAttack());
+        queue.Enqueue(() => this.ShowUIPlayerStats());
         queue.Enqueue(() => this.ShowUIMoveLog());
 
         // Don't need to wait for a click to show the player stats bar at the bottom.
-        ShowUIPlayerStats();
+        // ShowUIPlayerStats();
 
         // Pop off the first action (player doesn't have to click yet).
         Action first_action = queue.Dequeue();
