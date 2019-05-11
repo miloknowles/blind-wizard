@@ -15,6 +15,7 @@ public class StartIntro : MonoBehaviour
 
         // Since this is the main menu and we are starting a new game, reset all of the game state.
         GameStateManager.InitializeNewGame(true);
+        GameStateManager.MapState.ResetBattleNodes();
     }
 
     private void OnClick()

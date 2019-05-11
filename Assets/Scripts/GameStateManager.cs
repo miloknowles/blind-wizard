@@ -52,6 +52,11 @@ public class GameStateManager : MonoBehaviour
             // play through again with a different path in mind.
             // BattleNodes = new Dictionary<string, BattleNodeInfo>();
         }
+
+        public static void ResetBattleNodes()
+        {
+            BattleNodes = new Dictionary<string, BattleNodeInfo>();
+        }
     };
 
     /*
