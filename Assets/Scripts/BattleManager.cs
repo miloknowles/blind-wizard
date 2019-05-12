@@ -55,7 +55,10 @@ public class BattleManager : MonoBehaviour
     public GameObject UIEnemyAttributeText;
     public GameObject UIEnemyMaxHealthText;
     public GameObject UIRegionSamplesTitle;
-    public GameObject UIRegionSamplesText;
+    public GameObject UIRegionSamplesText1;
+    public GameObject UIRegionSamplesText2;
+    public GameObject UIRegionSamplesText3;
+    public GameObject UIRegionSamplesText4;
     public GameObject UIMoveLogMenu;
     public GameObject UIBlinkingDarkOccluder;
     public GameObject UIEnemyHitPlayer;
@@ -139,10 +142,13 @@ public class BattleManager : MonoBehaviour
 
         UIRegionSamplesTitle.GetComponent<TextMeshProUGUI>().text = "You have observed " + total_samples + " enemies:";
 
-        UIRegionSamplesText.GetComponent<TextMeshProUGUI>().text =
-            num_water_enemies.ToString() + " water type creatures\n" +
-            num_fire_enemies.ToString() + " fire type creatures\n" +
-            num_air_enemies.ToString() + " air type creatures\n" +
+        UIRegionSamplesText1.GetComponent<TextMeshProUGUI>().text =
+            num_water_enemies.ToString() + " water type creatures\n";
+        UIRegionSamplesText2.GetComponent<TextMeshProUGUI>().text =
+            num_fire_enemies.ToString() + " fire type creatures\n";
+        UIRegionSamplesText3.GetComponent<TextMeshProUGUI>().text =
+            num_air_enemies.ToString() + " air type creatures\n";
+        UIRegionSamplesText4.GetComponent<TextMeshProUGUI>().text =
             num_earth_enemies.ToString() + " earth type creatures\n";
 
         UIEnemyHitPlayer.SetActive(false);
