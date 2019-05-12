@@ -930,6 +930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1288220364}
   - component: {fileID: 1288220365}
+  - component: {fileID: 1288220366}
   m_Layer: 5
   m_Name: TutorialModeToggle
   m_TagString: Untagged
@@ -1004,6 +1005,18 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &1288220366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288220363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d56caf3342b3f488be84a45de8f9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1396162175
 GameObject:
   m_ObjectHideFlags: 0

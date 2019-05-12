@@ -35,11 +35,11 @@ public class BattleManager : MonoBehaviour
     private Dictionary<Region, string> BackgroundSpriteFilenames = new Dictionary<Region, string>()
     {
         {Region.City, "Backgrounds/city_background"},
-        {Region.Forest, "Backgrounds/plains_background"},       // TODO
+        {Region.Forest, "Backgrounds/forest_background"},
         {Region.Mountain, "Backgrounds/mountain_background"},
-        {Region.Storm, "Backgrounds/city_background"},          // TODO
-        {Region.Plains, "Backgrounds/plains_background"},       // TODO
-        {Region.Village, "Backgrounds/city_background"}         // TODO
+        {Region.Storm, "Backgrounds/storm_background"},
+        {Region.Plains, "Backgrounds/plains_background"},
+        {Region.Village, "Backgrounds/village_background"}
     };
 
     //================ ENEMY SPRITE IMAGES ============================

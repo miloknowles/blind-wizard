@@ -16,7 +16,6 @@ using Primitives;
  */
 public class ActorManager : MonoBehaviour {
     public GameObject UIActorStatsPanel;   // Should be set from Unity editor.
-    public GameObject narratorText; // Should be set from Unity editor.
 
     // The setter for health automatically updates the UI component that's
     // responsible for displaying it.
@@ -59,12 +58,9 @@ public class ActorManager : MonoBehaviour {
 
         // Simulate whether the attack should hit.
         if (random_val <= accuracy) {
-            narratorText.GetComponent<Text>().text = this.name + " attack hit! "+ attack.damage+"hp";
             target.ReceiveDamage(attack.damage);
             return true;
         }
-
-        narratorText.GetComponent<Text>().text = this.name + " attack missed!";
 
         return false;
     }
