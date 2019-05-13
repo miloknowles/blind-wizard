@@ -21,19 +21,22 @@ public class UpdateZoneSprites : MonoBehaviour
             btn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(
                     GameStateManager.MapState.BattleNodes[btn.name].sprite);
 
+            // Display the name of the region above each icon.
             GameObject txt = btn.transform.Find("TextMeshPro").gameObject;
             txt.GetComponent<TextMeshPro>().text = GameStateManager.MapState.BattleNodes[btn.name].region.ToString();
+
+            // Instead of making completed battles disappear, turn them into graves.
+            if (GameStateManager.MapState.BattleNodes[btn.name].completed) {
+                btn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("grave");
+            }
         }
 
-        foreach(GameObject ht in hearts)
-        {
+        foreach(GameObject ht in hearts) {
             // List all the hearts in the persistent dictionary with the flag collected = false.
-            if(!GameStateManager.MapState.hearts.ContainsKey(ht.name))
-            {
+            if(!GameStateManager.MapState.hearts.ContainsKey(ht.name)) {
                 GameStateManager.MapState.hearts[ht.name] = false;
             } // And destroy all collected hearts.
-            else if(GameStateManager.MapState.hearts[ht.name])
-            {
+            else if(GameStateManager.MapState.hearts[ht.name]) {
                 Destroy(ht);
             }
         }

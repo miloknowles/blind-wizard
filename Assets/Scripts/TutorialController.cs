@@ -12,6 +12,7 @@ public class TutorialController : MonoBehaviour
     public GameObject TutorialText_Attribute;
     public GameObject TutorialText_AttributeBayes;
     public GameObject UIChooseAttackPanel;
+    public GameObject ElementButtonGridLayout;
     public GameObject TutorialText_AttackPanel;
     public GameObject UIMoveLogScrollView;
     public GameObject TutorialText_MoveLog;
@@ -46,6 +47,26 @@ public class TutorialController : MonoBehaviour
         TutorialText_Attribute.SetActive(false);
         TutorialText_Region.SetActive(false);
         TutorialText_AttributeBayes.SetActive(false);
+    }
+
+    private void SetInteractable(bool enable)
+    {
+        // Get all buttons that are interactable.
+        List<GameObject> buttons = new List<GameObject>();
+
+        // Grab all of the punch, kick, tackle buttons.
+        foreach (Transform child in UIChooseAttackPanel.transform) {
+            if (child.gameObject.tag == "SelectActionButton") { buttons.Add(child.gameObject); }
+        }
+
+        // Get all of the element choosing buttons.
+        foreach (Transform child in ElementButtonGridLayout.transform) {
+            if (child.gameObject.tag == "SelectElementButton") { buttons.Add(child.gameObject); }
+        }
+        
+        foreach (var b in buttons) {
+            b.GetComponent<Button>().interactable = enable;
+        }
     }
 
     /*
@@ -210,6 +231,7 @@ public class TutorialController : MonoBehaviour
             if (GameStateManager.MapState.BattlesCompleted == 0) {
                 Debug.Log("Battle #3: Introduction region info.");
                 HideAll();
+                SetInteractable(false);
                 queue.Enqueue(() => this.ShowUIRegionSamples());
                 queue.Enqueue(() => this.ShowEnemy());
                 queue.Enqueue(() => this.ShowUIChooseAttack());
@@ -250,6 +272,7 @@ public class TutorialController : MonoBehaviour
             action();
         } else {
             UIConfirmInfoButton.SetActive(false);
+            SetInteractable(true);
             HideAllTutorialText();
         }
     }
