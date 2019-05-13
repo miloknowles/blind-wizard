@@ -7361,6 +7361,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &114565044
@@ -7519,6 +7524,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &294472153
@@ -7889,6 +7899,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1 &680776191
@@ -8345,6 +8360,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &831920323
@@ -8681,6 +8701,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1104761848
@@ -8839,6 +8864,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1451991567
@@ -8908,6 +8938,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1461667572
@@ -8977,6 +9012,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1469664112
@@ -9324,6 +9364,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1573644061
@@ -10032,6 +10077,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1955167800
@@ -10190,6 +10240,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1983685770
@@ -10259,6 +10314,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1 &1989963382
@@ -10767,6 +10827,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &2589735920278497585
