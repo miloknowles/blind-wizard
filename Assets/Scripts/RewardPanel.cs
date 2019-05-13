@@ -45,20 +45,20 @@ public class RewardPanel : MonoBehaviour
     {
         //Instead of healing the player, increase the wizard's maximum health
         //GameStateManager.PlayerStats.Health = Mathf.Min(GameStateManager.PlayerStats.Health + 20, 100);
-        GameStateManager.PlayerStats.MaxHealth = GameStateManager.PlayerStats.MaxHealth + 20;
-        GameStateManager.PlayerStats.Health = GameStateManager.PlayerStats.Health + 20;
+        GameStateManager.PlayerStats.MaxHealth = GameStateManager.PlayerStats.MaxHealth + 10;
+        GameStateManager.PlayerStats.Health = GameStateManager.PlayerStats.Health + 10;
         SceneManager.LoadScene("MapScene");
     }
 
     void SampleButtonClicked()
     {
-        GameStateManager.PlayerStats.AddSamplesForRegion(this.region, 15);
+        GameStateManager.PlayerStats.AddSamplesForRegion(this.region, 20);
         SceneManager.LoadScene("MapScene");
     }
 
     void DamageButtonClicked()
     {
-        GameStateManager.GameConstants.UpgradeDamage(this.attack, 10);
+        GameStateManager.GameConstants.UpgradeDamage(this.attack, 5);
         SceneManager.LoadScene("MapScene");
     }
 
