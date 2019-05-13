@@ -78,6 +78,10 @@ public class WizardScript : MonoBehaviour
             // Otherwise go to battle!
             GameStateManager.MapState.BattleNodes[name].completed = true;
             EnterBattle(GameStateManager.MapState.BattleNodes[name].region);
+        
+        // The glasses trigger the end of the game!!!
+        } else if (collider.gameObject.name == "VictoryGlassesSprite") {
+            SceneManager.LoadScene("GameWin1");
         }
     }
 
