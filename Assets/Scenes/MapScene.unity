@@ -7984,11 +7984,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
-        type: 3}
-      propertyPath: UIActorStatsPanel
-      value: 
-      objectReference: {fileID: 744047437}
     - target: {fileID: 3389705687910478294, guid: 3f3cb5b40d008244e98199a0455f60b3,
         type: 3}
       propertyPath: m_SortingOrder
@@ -8000,6 +7995,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 050e5fd8f4db28b40a6cf8dd64cc5a5a,
         type: 3}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &483888652
@@ -10151,7 +10151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1500872560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10769,16 +10769,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
-        type: 3}
-      propertyPath: UIActorStatsPanel
-      value: 
-      objectReference: {fileID: 744047437}
     - target: {fileID: 3389705687910478294, guid: 3f3cb5b40d008244e98199a0455f60b3,
         type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2434663750424890781, guid: 3f3cb5b40d008244e98199a0455f60b3,
+        type: 3}
+      propertyPath: UIActorStatsPanel
+      value: 
+      objectReference: {fileID: 744047437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3cb5b40d008244e98199a0455f60b3, type: 3}
 --- !u!1001 &1743609193
