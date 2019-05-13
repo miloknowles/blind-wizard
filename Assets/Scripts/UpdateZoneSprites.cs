@@ -8,6 +8,7 @@ public class UpdateZoneSprites : MonoBehaviour
     void Start()
     {
         GameObject[] battle_trigger_nodes = GameObject.FindGameObjectsWithTag("BattleTriggerNode");
+        GameObject[] hearts = GameObject.FindGameObjectsWithTag("Heart");
         
         foreach (GameObject btn in battle_trigger_nodes) {
             // If this node hasn't already been assigned a Region, do that first.
@@ -18,6 +19,19 @@ public class UpdateZoneSprites : MonoBehaviour
             // Now make sure this node's sprite is set to the correct file.
             btn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(
                     GameStateManager.MapState.BattleNodes[btn.name].sprite);
+        }
+
+        foreach(GameObject ht in hearts)
+        {
+            // List all the hearts in the persistent dictionary with the flag collected = false.
+            if(!GameStateManager.MapState.hearts.ContainsKey(ht.name))
+            {
+                GameStateManager.MapState.hearts[ht.name] = false;
+            } // And destroy all collected hearts.
+            else if(GameStateManager.MapState.hearts[ht.name])
+            {
+                Destroy(ht);
+            }
         }
     }
 }

@@ -43,7 +43,10 @@ public class RewardPanel : MonoBehaviour
 
     void HealButtonClicked()
     {
-        GameStateManager.PlayerStats.Health = Mathf.Min(GameStateManager.PlayerStats.Health + 20, 100);
+        //Instead of healing the player, increase the wizard's maximum health
+        //GameStateManager.PlayerStats.Health = Mathf.Min(GameStateManager.PlayerStats.Health + 20, 100);
+        GameStateManager.PlayerStats.MaxHealth = GameStateManager.PlayerStats.MaxHealth + 20;
+        GameStateManager.PlayerStats.Health = GameStateManager.PlayerStats.Health + 20;
         SceneManager.LoadScene("MapScene");
     }
 

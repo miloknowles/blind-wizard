@@ -25,7 +25,7 @@ public class UIStatsDisplay : MonoBehaviour
     public void UpdateHealth(int value)
     {
         var rectTransform = UIActorHealthBarSprite.GetComponent<RectTransform>();
-        float max_value = determineEnemyMaxHealth ? (float)GameStateManager.UpcomingEnemyStats.DetermineEnemyMaxHealth() : 100.0f;
+        float max_value = determineEnemyMaxHealth ? (float)GameStateManager.UpcomingEnemyStats.DetermineEnemyMaxHealth() : (float)GameStateManager.PlayerStats.MaxHealth;
         rectTransform.sizeDelta = new Vector2(this.healthBarInitialWidth * (float)value / max_value, this.healthBarInitialHeight);
         currentHealthText.text = value + "hp";
     }

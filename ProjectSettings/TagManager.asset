@@ -12,6 +12,7 @@ TagManager:
   - SelectElementButton
   - BattleTriggerNode
   - Wizard
+  - Heart
   layers:
   - Default
   - TransparentFX

@@ -41,12 +41,14 @@ public class GameStateManager : MonoBehaviour
         // has been completed and what its Region is. This is persisted here so that its consistent
         // every time the Map Scene is reloaded.
         public static Dictionary<string, BattleNodeInfo> BattleNodes = new Dictionary<string, BattleNodeInfo>();
+        // Create a similar persistent data store for the hearts and whether they've been collected.
+        public static Dictionary<string, bool> hearts = new Dictionary<string, bool>();
 
         public static void Reset()
         {
             WizardPosition = new Vector3(0, 0, 0);
             BattlesCompleted = 0;
-
+            hearts = new Dictionary<string, bool>();
             // WARNING: Resetting the battle nodes below could erase all of the work that UpdateZoneSprites does
             // so I don't think it's a good idea. Currently, the BattleNodes will stay the same for multiple
             // playthroughs, until the game is restarted. This is fine, especially if the player wants to
@@ -113,6 +115,7 @@ public class GameStateManager : MonoBehaviour
      */
     public static class PlayerStats {
         public static int Health { get; set; }
+        public static int MaxHealth { get; set; }
 
         // For each region, store a dictionary that maps each element to an int.
         public static Dictionary<Region, ElementSamples> Samples = new Dictionary<Region, ElementSamples>();
@@ -130,6 +133,7 @@ public class GameStateManager : MonoBehaviour
 
         public static void Reset()
         {
+            MaxHealth = 100;
             Health = 100;
             
             // Set samples for each element in each region to zero.
