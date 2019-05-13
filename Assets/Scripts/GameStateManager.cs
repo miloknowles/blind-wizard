@@ -70,7 +70,7 @@ public class GameStateManager : MonoBehaviour
     public static class GameConstants
     {
         public static double SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
-        public static int GENERIC_ENEMY_ATTACK_DAMAGE = 15;
+        public static int GENERIC_ENEMY_ATTACK_DAMAGE = 12;
         public static double GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
         public static int PUNCH_DAMAGE = 15;
         public static double PUNCH_ACCURACY = 0.70;
@@ -96,7 +96,7 @@ public class GameStateManager : MonoBehaviour
         public static void Reset()
         {
             SUPER_EFFECTIVE_ACCURACY_BONUS = 0.3;
-            GENERIC_ENEMY_ATTACK_DAMAGE = 15;
+            GENERIC_ENEMY_ATTACK_DAMAGE = 12;
             GENERIC_ENEMY_ATTACK_ACCURACY = 0.6;
             PUNCH_DAMAGE = 15;
             PUNCH_ACCURACY = 0.7;
