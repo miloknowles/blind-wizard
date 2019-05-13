@@ -18,7 +18,7 @@ public class StartIntro : MonoBehaviour
         GameStateManager.MapState.ResetBattleNodes();
     }
 
-    private void OnClick()
+    public void OnClick()
     {
         SceneManager.LoadScene("GameIntro");
     }
