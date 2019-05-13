@@ -26,6 +26,12 @@ public class WizardScript : MonoBehaviour
         }
         
         UIActorStatsPanel.GetComponent<UIStatsDisplay>().UpdateHealth(GameStateManager.PlayerStats.Health);
+        foreach (string name in GameStateManager.MapState.BattleNodes.Keys)
+        {
+            GameObject go = GameObject.Find(name);
+            if (GameStateManager.MapState.BattleNodes[name].completed)
+                go.SetActive(false);
+        }
     }
 
     // Update is called once per frame
