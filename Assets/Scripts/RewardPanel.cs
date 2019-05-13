@@ -24,6 +24,9 @@ public class RewardPanel : MonoBehaviour
         this.region = ProbabilitySystem.SampleRegionUniform();
         this.attack = SampleAttackUniform();
 
+        damageButton.GetComponentInChildren<TextMeshProUGUI>().text = "+5 " + this.attack.GetType().Name + " Damage";
+        sampleButton.GetComponentInChildren<TextMeshProUGUI>().text = "+20 samples for " + System.Enum.GetName(typeof(Region), this.region);
+
         // Fill in the attack placeholder.
         UIDescribeUpdatesText.GetComponent<TextMeshProUGUI>().text =
             UIDescribeUpdatesText.GetComponent<TextMeshProUGUI>().text.Replace("$ATTACK$", this.attack.GetType().Name);
