@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Primitives;
+using TMPro;
 
 public class UpdateZoneSprites : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class UpdateZoneSprites : MonoBehaviour
             // Now make sure this node's sprite is set to the correct file.
             btn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(
                     GameStateManager.MapState.BattleNodes[btn.name].sprite);
+
+            GameObject txt = btn.transform.Find("TextMeshPro").gameObject;
+            txt.GetComponent<TextMeshPro>().text = GameStateManager.MapState.BattleNodes[btn.name].region.ToString();
         }
 
         foreach(GameObject ht in hearts)
