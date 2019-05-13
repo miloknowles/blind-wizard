@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class TutorialController : MonoBehaviour
 {
     public GameObject UIRegionSamplesPanel;
+    public GameObject TutorialText_Region;
     public GameObject UIAttributeInfoPanel;
     public GameObject TutorialText_Attribute;
+    public GameObject TutorialText_AttributeBayes;
     public GameObject UIChooseAttackPanel;
     public GameObject TutorialText_AttackPanel;
     public GameObject UIMoveLogScrollView;
@@ -42,6 +44,8 @@ public class TutorialController : MonoBehaviour
         TutorialText_MoveLog.SetActive(false);
         TutorialText_PlayerStats.SetActive(false);
         TutorialText_Attribute.SetActive(false);
+        TutorialText_Region.SetActive(false);
+        TutorialText_AttributeBayes.SetActive(false);
     }
 
     /*
@@ -101,9 +105,15 @@ public class TutorialController : MonoBehaviour
 
     private void ShowUIRegionSamples()
     {
-        // This panel is anchored to the top left.
-        UIConfirmInfoButton.transform.SetParent(UIRegionSamplesPanel.transform, false);
-        UIConfirmInfoButton.transform.localPosition = new Vector3(0.0f, -90.0f, 0.0f);
+        HideAllTutorialText();
+        TutorialText_Region.SetActive(true);
+
+        float button_width = UIConfirmInfoButton.GetComponent<RectTransform>().rect.width;
+        float button_height = UIConfirmInfoButton.GetComponent<RectTransform>().rect.height;
+
+        UIConfirmInfoButton.transform.SetParent(TutorialText_Region.transform, false);
+        UIConfirmInfoButton.transform.localPosition =
+            new Vector3(0.0f, -button_height - 10.0f, 0.0f);
 
         UIRegionSamplesPanel.SetActive(true);
         UIConfirmInfoButton.SetActive(true);
@@ -119,6 +129,17 @@ public class TutorialController : MonoBehaviour
         UIConfirmInfoButton.transform.localPosition = new Vector3(350.0f, 0.0f, 0.0f);
 
         UIAttributeInfoPanel.SetActive(true);
+        UIConfirmInfoButton.SetActive(true);
+    }
+
+    private void ShowBayesTutorial()
+    {
+        HideAllTutorialText();
+        TutorialText_AttributeBayes.SetActive(true);
+
+        UIConfirmInfoButton.transform.SetParent(UIAttributeInfoPanel.transform, false);
+        UIConfirmInfoButton.transform.localPosition = new Vector3(350.0f, 0.0f, 0.0f);
+
         UIConfirmInfoButton.SetActive(true);
     }
 
@@ -210,6 +231,7 @@ public class TutorialController : MonoBehaviour
                 this.ShowUIMoveLog();
 
                 queue.Enqueue(() => this.ShowUIAttributeInfo());
+                queue.Enqueue(() => this.ShowBayesTutorial());
 
                 // Pop off the first action (player doesn't have to click yet).
                 Action first_action = queue.Dequeue();
