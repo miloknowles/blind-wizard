@@ -35,7 +35,7 @@ public class WizardScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GetInput();
         Move();
@@ -43,7 +43,7 @@ public class WizardScript : MonoBehaviour
 
     public void Move()
     {
-        transform.Translate(direction * this.speed * Time.deltaTime);
+        gameObject.transform.Translate(direction * this.speed * Time.deltaTime);
     }
 
     private void GetInput()
