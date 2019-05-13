@@ -38,7 +38,7 @@ public class RewardPanel : MonoBehaviour
 
         // Indicate that we have completed another battle!
         GameStateManager.MapState.BattlesCompleted += 1;
-        GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_DAMAGE += 3; //Makes the enemy more powerful for each battle you fight
+        GameStateManager.GameConstants.GENERIC_ENEMY_ATTACK_DAMAGE += (int) Mathf.Floor(4 / Mathf.Sqrt( GameStateManager.MapState.BattlesCompleted)); //Makes the enemy more powerful for each battle you fight
     }
 
     void HealButtonClicked()
