@@ -20,7 +20,7 @@ public class DisplayEnemyTypeScript : MonoBehaviour
         {
             preposition = " an ";
         }
-        infoText.text = "Congratulations, you defeated "+ preposition + GameStateManager.UpcomingEnemyStats.Element.ToString() + " type enemy!";
+        infoText.text = "Congratulations, you defeated "+ preposition + GameStateManager.UpcomingEnemyStats.Element.ToString() + " type enemy! \nAfter the battle, you sampled an additional 10 creatures in the " + GameStateManager.MapState.CurrentRegion.ToString()+" region.";
     }
 
     public void SwitchToUpgrade()
