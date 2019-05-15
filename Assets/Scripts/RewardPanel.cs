@@ -18,9 +18,13 @@ public class RewardPanel : MonoBehaviour
     private Attack attack;
     private static System.Random rng = new System.Random();
 
+    private Region currentRegion;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentRegion = GameStateManager.MapState.CurrentRegion;
+        GameStateManager.PlayerStats.AddSamplesForRegion(currentRegion, 10);
         this.region = ProbabilitySystem.SampleRegionUniform();
         this.attack = SampleAttackUniform();
 

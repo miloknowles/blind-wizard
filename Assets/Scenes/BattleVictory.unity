@@ -1563,7 +1563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50.599987}
+  m_AnchoredPosition: {x: 0, y: 116}
   m_SizeDelta: {x: 742.6, y: 101.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396162177
@@ -2071,8 +2071,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.8, y: 178.7}
-  m_SizeDelta: {x: 483.4, y: 103.3}
+  m_AnchoredPosition: {x: 9.8, y: 133}
+  m_SizeDelta: {x: 502.7, y: 228.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835509311
 MonoBehaviour:
@@ -2094,7 +2094,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Congratulations, you defeated a %type% type enemy!
+  m_text: "Congratulations, you defeated a %type% type enemy! \nAfter the battle,
+    you sampled an additional 10 creatures in the %%%region### region."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7fab2d762e921423da201ba922f66202, type: 2}
   m_sharedMaterial: {fileID: 21125757256039500, guid: 7fab2d762e921423da201ba922f66202,
@@ -2164,12 +2165,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1835509311}
-    characterCount: 50
+    characterCount: 136
     spriteCount: 0
-    spaceCount: 6
-    wordCount: 7
+    spaceCount: 20
+    wordCount: 20
     linkCount: 0
-    lineCount: 2
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

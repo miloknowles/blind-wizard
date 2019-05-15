@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collected: 0
-  healAmount: 20
+  healAmount: 50
   UIActorStatsPanel: {fileID: 0}
